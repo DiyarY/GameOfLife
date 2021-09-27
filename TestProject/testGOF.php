@@ -1,8 +1,8 @@
 <?php
 
-require_once "cellularAutomat\CellularAutomat.php";
+require_once "CellularAutomat.php";
 
-$sizeRangeOfBoard = 100;
+$sizeRangeOfBoard = 1;
 
 $createCellularAutomat = new CellularAutomat(5, 5);
 $createCellularAutomat->createBoard();

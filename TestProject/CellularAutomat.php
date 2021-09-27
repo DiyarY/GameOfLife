@@ -67,12 +67,12 @@ class CellularAutomat
         foreach($this->board as $widthID => $width)
         {
             $newBoard[$widthID] = [];
-            foreach ($width as $heightID => $height)
+            foreach($width as $heigthID => $heigth)
             {
-                $count = $this->countLivingNeighbors($widthID, $heightID);
+                $count = $this->countLivingNeighbors($widthID, $heigthID);
 
                 $newValue=null;
-                if($height == 1)
+                if($heigth == 1)
                 {
                     if($count < 2 || $count > 3)
                     {
@@ -89,7 +89,7 @@ class CellularAutomat
                     }
                 }
 
-                $newBoard[$widthID][$heightID] = $newValue;
+                $newBoard[$widthID][$heigthID] = $newValue;
             }
         }
     }
