@@ -114,4 +114,24 @@ class CellularAutomat
         $this->board[1][2]=1;
         $this->board[0][2]=1;
     }
+
+    /**
+     * Output of the whole Board with the cells; 1 stands for living cells and 0 stands for dead cells
+     */
+    function printOutBoard()
+    {
+       for($y = 0; $y < $this->width; $y++)
+       {
+           for($x = 0; $x < $this->heigth; $x++)
+           {
+               $liveOrdead= 0;
+               if($this->board[$x][$y] == 1)
+               {
+                   $liveOrdead=1;
+                   echo $liveOrdead;
+               }
+           }
+           echo "\n";
+       }
+    }
 }
