@@ -38,6 +38,7 @@ class CellularAutomat
      */
     function countLivingNeighbors($x, $y)
     {
+        //Analyzing the living/dead neighboors
         $coordinates = [
             [-1, -1], [-1, 0], [-1, 1],
             [0, -1], [0, 1],
@@ -107,6 +108,10 @@ class CellularAutomat
         }
         $this->board[$y] = $row;
 
-
+        $this->board[1][0]=1;
+        $this->board[2][1]=1;
+        $this->board[2][2]=1;
+        $this->board[1][2]=1;
+        $this->board[0][2]=1;
     }
 }
