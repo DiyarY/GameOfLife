@@ -1,15 +1,15 @@
 <?php
-
 require_once "CellularAutomat.php";
 
-$sizeRangeOfBoard = 1;
-
-$createCellularAutomat = new CellularAutomat(5, 5);
+/**
+ * Total number of rows and cols
+ */
+$createCellularAutomat = new CellularAutomat(8, 8);
 $createCellularAutomat->createBoard();
 
-for($i = 0; $i < $sizeRangeOfBoard; $i++)
+for($i = 0; $i < 5; $i++)
 {
-    echo "Generation: ".$i."\n";
+    echo "\nVersion: ".$i."\n";
     $createCellularAutomat->printOutBoard();
     $createCellularAutomat->calculateNextGeneration();
 }

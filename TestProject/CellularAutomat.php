@@ -2,11 +2,20 @@
 
 class CellularAutomat
 {
+    /**
+     * Dekleration of the rows, cols and the board.
+     *
+     * @var $heigth
+     * @var $width
+     * @var $board
+     */
     public $heigth;
     public $width;
-    public $board = [0, 1, 2, 3, 4, 5, [0, 1, 2, 3, 4, 5]];
+    public $board = [[]];
 
     /**
+     * Set the total numbers of the rows and cols.
+     *
      * @param $_heigth
      * @param $_width
      */
@@ -17,24 +26,24 @@ class CellularAutomat
     }
 
     /**
-     * Creation of the board which consists of cells and set as rows and cols
+     * Create the board
      */
     function createBoard(){
-        for($y = 0; $y < $this->width; $y++) {
+        for($y = 0; $y < $this->heigth; ++$y) {
             $row = [];
-            for($x = 0; $x < $this->heigth; $x++) {
+            for($x = 0; $x < $this->width; ++$x) {
                 $row[$x] = rand(0,1);
             }
+            $this->board[$y] = $row;
         }
-        $this->board[$y] = $row;
     }
 
     /**
+     * The living and dead neighbors will be counted around the base cell.
+     *
      * @param $x
      * @param $y
      * @return int
-     *
-     * The living and dead neighbors will be counted around the base cell
      */
     function countLivingNeighbors($x, $y)
     {
@@ -59,10 +68,11 @@ class CellularAutomat
     }
 
     /**
-     * On base of the living and dead neighbors, the next generation will be created
+     * On base of the living and dead neighbors the next generation will be calculated.
      */
-    function calculateNextGeneration() {
-        $newBoard= [];
+    function calculateNextGeneration()
+    {
+        $newBoard = [];
 
         foreach($this->board as $widthID => $width)
         {
@@ -92,22 +102,23 @@ class CellularAutomat
                 $newBoard[$widthID][$heigthID] = $newValue;
             }
         }
+
+        $this->board = $newBoard;
     }
 
     /**
      *
-     * Creation of a glider which runs/glids thorugh the board
+     * A glider function wich runs/glides through the whole board.
      */
     function createGlider()
     {
-        for($y = 0; $y < $this->width; $y++) {
+        for($y = 0; $y < $this->heigth; ++$y) {
             $row = [];
-            for($x = 0; $x < $this->heigth; $x++) {
-                $row[$x] = rand(0,1);
+            for($x = 0; $x < $this->width; ++$x) {
+                $row[$x] = 0;
             }
+            $this->board[$y] = $row;
         }
-        $this->board[$y] = $row;
-
         $this->board[1][0]=1;
         $this->board[2][1]=1;
         $this->board[2][2]=1;
@@ -116,20 +127,22 @@ class CellularAutomat
     }
 
     /**
-     * Output of the whole Board with the cells; 1 stands for living cells and 0 stands for dead cells
+     * Print out the board: living cells are marked as 1, dead cells are marked as 0.
      */
     function printOutBoard()
     {
-       for($y = 0; $y < $this->width; $y++)
+       for($y = 0; $y < $this->heigth; ++$y)
        {
-           for($x = 0; $x < $this->heigth; $x++)
+           for($x = 0; $x < $this->width; ++$x)
            {
+               //the dead cells
                $liveOrdead= 0;
                if($this->board[$x][$y] == 1)
-               {
+
+                   //living cells
                    $liveOrdead=1;
                    echo $liveOrdead;
-               }
+
            }
            echo "\n";
        }
