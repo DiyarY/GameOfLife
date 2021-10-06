@@ -1,9 +1,10 @@
 <?php
+namespace cellularAutomat;
 
-class CellularAutomat
+class Board
 {
     /**
-     * Dekleration of the rows, cols and the board.
+     * Decleration of the rows, cols and the board.
      *
      * @var $heigth
      * @var $width
@@ -68,7 +69,7 @@ class CellularAutomat
     }
 
     /**
-     * On base of the living and dead neighbors the next generation will be calculated.
+     * On base of the living and dead neighbors, the next generation will be generated.
      */
     function calculateNextGeneration()
     {
@@ -98,7 +99,6 @@ class CellularAutomat
                         $newValue = 1;
                     }
                 }
-
                 $newBoard[$widthID][$heigthID] = $newValue;
             }
         }
@@ -107,8 +107,7 @@ class CellularAutomat
     }
 
     /**
-     *
-     * A glider function wich runs/glides through the whole board.
+     * A glider function which runs/glides through the whole board.
      */
     function createGlider()
     {
@@ -137,7 +136,7 @@ class CellularAutomat
            {
                //the dead cells
                $liveOrdead= 0;
-               if($this->board[$x][$y] == 1)
+               if($this->board[$y][$x] == 1)
 
                    //living cells
                    $liveOrdead=1;
