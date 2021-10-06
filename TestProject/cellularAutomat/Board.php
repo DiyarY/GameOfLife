@@ -1,28 +1,43 @@
 <?php
 namespace cellularAutomat;
 
+
+/**
+ * This is a small basic project about conways game of Life
+ *
+ * Conways Game of Life is a two-dimensional grid of squares and cells or numbers (alive: 1, dead: 0),
+ * where each cell has two possible states, alive or dead. Each cell interacts with its eight neighbours,
+ * which are the cells that are horizontally, vertically or diagonally adjacent.
+ *
+ *   1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+ *   2. Any live cell with two or three live neighbours lives on to the next generation.
+ *   3. Any live cell with more than three live neighbours dies, as if by overcrowding.
+ *   4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+ */
 class Board
 {
     /**
      * Decleration of the rows, cols and the board.
      *
-     * @var $heigth
+     * The total number of the width and height are saved inside a two-dimensional Array
+     *
+     * @var $height
      * @var $width
      * @var $board
      */
-    public $heigth;
+    public $height;
     public $width;
     public $board = [[]];
 
     /**
      * Set the total numbers of the rows and cols.
      *
-     * @param $_heigth
+     * @param $_height
      * @param $_width
      */
-    function __construct($_heigth, $_width)
+    function __construct($_height, $_width)
     {
-        $this->heigth=$_heigth;
+        $this->height=$_height;
         $this->width=$_width;
     }
 
@@ -30,7 +45,7 @@ class Board
      * Create the board
      */
     function createBoard(){
-        for($y = 0; $y < $this->heigth; ++$y) {
+        for($y = 0; $y < $this->height; ++$y) {
             $row = [];
             for($x = 0; $x < $this->width; ++$x) {
                 $row[$x] = rand(0,1);
@@ -78,12 +93,12 @@ class Board
         foreach($this->board as $widthID => $width)
         {
             $newBoard[$widthID] = [];
-            foreach($width as $heigthID => $heigth)
+            foreach($width as $heightID => $height)
             {
-                $count = $this->countLivingNeighbors($widthID, $heigthID);
+                $count = $this->countLivingNeighbors($widthID, $heightID);
 
                 $newValue=null;
-                if($heigth == 1)
+                if($height == 1)
                 {
                     if($count < 2 || $count > 3)
                     {
@@ -99,7 +114,7 @@ class Board
                         $newValue = 1;
                     }
                 }
-                $newBoard[$widthID][$heigthID] = $newValue;
+                $newBoard[$widthID][$heightID] = $newValue;
             }
         }
 
@@ -111,7 +126,7 @@ class Board
      */
     function createGlider()
     {
-        for($y = 0; $y < $this->heigth; ++$y) {
+        for($y = 0; $y < $this->height; ++$y) {
             $row = [];
             for($x = 0; $x < $this->width; ++$x) {
                 $row[$x] = 0;
@@ -130,7 +145,7 @@ class Board
      */
     function printOutBoard()
     {
-       for($y = 0; $y < $this->heigth; ++$y)
+       for($y = 0; $y < $this->height; ++$y)
        {
            for($x = 0; $x < $this->width; ++$x)
            {
