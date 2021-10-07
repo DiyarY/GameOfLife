@@ -48,8 +48,8 @@ if($options->getOption("version"))
 /**
  * Set the total number for each row and col.
  */
-$width = 8;
-$height = 8;
+$width = 5;
+$height = 5;
 if($options->getOptions("width"))
 {
     $width = $options->getOptions("width");

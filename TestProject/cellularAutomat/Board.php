@@ -1,10 +1,9 @@
 <?php
 namespace cellularAutomat;
 
-
 /**
- * This is a small basic project about conways game of Life
- *
+* This is a small basic project about conways game of Life
+*
  * Conways Game of Life is a two-dimensional grid of squares and cells or numbers (alive: 1, dead: 0),
  * where each cell has two possible states, alive or dead. Each cell interacts with its eight neighbours,
  * which are the cells that are horizontally, vertically or diagonally adjacent.
@@ -84,7 +83,7 @@ class Board
     }
 
     /**
-     * On base of the living and dead neighbors, the next generation will be generated.
+     * On base of the living and dead neighbors the next generation will be calculated.
      */
     function calculateNextGeneration()
     {
@@ -114,6 +113,7 @@ class Board
                         $newValue = 1;
                     }
                 }
+
                 $newBoard[$widthID][$heightID] = $newValue;
             }
         }
@@ -122,7 +122,8 @@ class Board
     }
 
     /**
-     * A glider function which runs/glides through the whole board.
+     *
+     * A glider function wich runs/glides through the whole board.
      */
     function createGlider()
     {
@@ -145,20 +146,20 @@ class Board
      */
     function printOutBoard()
     {
-       for($y = 0; $y < $this->height; ++$y)
-       {
-           for($x = 0; $x < $this->width; ++$x)
-           {
-               //the dead cells
-               $liveOrdead= 0;
-               if($this->board[$y][$x] == 1)
+        for($y = 0; $y < $this->height; ++$y)
+        {
+            for($x = 0; $x < $this->width; ++$x)
+            {
+                //the dead cells
+                $liveOrdead= 0;
+                if($this->board[$y][$x] == 1)
 
-                   //living cells
-                   $liveOrdead=1;
-                   echo $liveOrdead;
+                    //living cells
+                    $liveOrdead=1;
+                echo $liveOrdead;
 
-           }
-           echo "\n";
-       }
+            }
+            echo "\n";
+        }
     }
 }
