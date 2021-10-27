@@ -23,10 +23,12 @@ class Board
      * @var $height
      * @var $width
      * @var $board
+     * @var $lastGeneration
      */
     public $height;
     public $width;
     public $board = [[]];
+    public $lastGeneration = [];
 
     /**
      * Set the total numbers of the rows and cols.
@@ -117,12 +119,11 @@ class Board
                 $newBoard[$widthID][$heightID] = $newValue;
             }
         }
-
+        $this->lastGeneration[] = $this->board;
         $this->board = $newBoard;
     }
 
     /**
-     *
      * A glider function wich runs/glides through the whole board.
      */
     function createGlider()
@@ -162,4 +163,21 @@ class Board
             echo "\n";
         }
     }
+
+    /**
+     * @return bool
+     *
+     * Stops to create a next generation if the actual generation
+     * is similar to the previous one.
+     */
+    function stopCreationOfGeneration()
+    {
+            $lastBoard = $this->lastGeneration[count($this->lastGeneration) -1];
+            $actualBoard = $this->board;
+
+            if($lastBoard == $actualBoard) return true;
+
+            return false;
+    }
+
 }

@@ -24,8 +24,8 @@ spl_autoload_register("myAutoload");
 $options = new Getopt([['r', "startRandom", Getopt::NO_ARGUMENT, "Starts the board with random cells which are dead/alive"],
                         ['g', "startGlider", Getopt::NO_ARGUMENT, "Starts the board with a glider which runs through the board"],
                         ['w', "width", Getopt::REQUIRED_ARGUMENT, "Sets the width of the board"],
-                        ['h', "heigth", Getopt::REQUIRED_ARGUMENT, "Sets the height of the board"],
-                        ['s', "maxSteps", Getopt::NO_ARGUMENT, "Sets the number of the generations"],
+                        ['e', "height", Getopt::REQUIRED_ARGUMENT, "Sets the height of the board"],
+                        ['s', "maxSteps", Getopt::REQUIRED_ARGUMENT, "Sets the number of the generations"],
                         ['v', "version", Getopt::NO_ARGUMENT, "Shows the version"],
                         ['h', "help", Getopt::NO_ARGUMENT, "Shows a help/guide menu"]]);
 
@@ -35,14 +35,16 @@ $options = new Getopt([['r', "startRandom", Getopt::NO_ARGUMENT, "Starts the boa
 $options->parse();
 
 
-if($options->getOptions("help"))
+if($options->getOption("help"))
 {
     $options->showHelp();
+    die;
 }
 
 if($options->getOption("version"))
 {
     echo "Version: 1.0\n";
+    die;
 }
 
 /**
@@ -50,23 +52,23 @@ if($options->getOption("version"))
  */
 $width = 5;
 $height = 5;
-if($options->getOptions("width"))
+if($options->getOption("width"))
 {
-    $width = $options->getOptions("width");
+    $width = $options->getOption("width");
 }
 
-if($options->getOptions("height"))
+if($options->getOption("height"))
 {
-    $height = $options->getOptions("height");
+    $height = $options->getOption("height");
 }
 
 /**
  * Total number of generations.
  */
-$maxSteps = 5;
-if($options->getOptions("maxSteps"))
+$maxSteps = 7;
+if($options->getOption("maxSteps"))
 {
-    echo $maxSteps;
+    $maxSteps = $options->getOption("maxSteps");
 }
 
 /**
@@ -75,22 +77,24 @@ if($options->getOptions("maxSteps"))
  */
 $startBoard = new Board($width, $height);
 
-if($options->getOptions("startRandom"))
+if($options->getOption("startRandom"))
 {
     $startBoard->createBoard();
 }
 
-if($options->getOptions("startGlider"))
+if($options->getOption("startGlider"))
 {
     $startBoard->createGlider();
 }
 
-
-$startBoard->createBoard();
+//$startBoard->createBoard();
 
 /**
- * Starts the board together with all generated generations.
- * If the Board reached the end of the set generations the game is over
+ * Starts to create the number of generations, which are set in "maxSteps".
+ *
+ * The Board stops to generate a next generation if it reached the last number of "maxSteps".
+ *
+ * The Board stops to generate a next generation if it's similar to the next one.
  */
 for($i = 0; $i < $maxSteps; $i++)
 {
@@ -98,8 +102,5 @@ for($i = 0; $i < $maxSteps; $i++)
     $startBoard->printOutBoard();
     $startBoard->calculateNextGeneration();
 
-    if($i == $maxSteps)
-    {
-        break;
-    }
+    if($startBoard->stopCreationOfGeneration() == true) break;
 }
