@@ -16,10 +16,6 @@ namespace cellularAutomat;
 class Board
 {
     /**
-     * Decleration of the rows, cols and the board.
-     *
-     * The total number of the width and height are saved inside a two-dimensional Array
-     *
      * @var $height
      * @var $width
      * @var $board
@@ -46,9 +42,9 @@ class Board
      * Create the board
      */
     function createBoard(){
-        for($y = 0; $y < $this->height; ++$y) {
+        for ($y = 0; $y < $this->height; ++$y) {
             $row = [];
-            for($x = 0; $x < $this->width; ++$x) {
+            for ($x = 0; $x < $this->width; ++$x) {
                 $row[$x] = rand(0,1);
             }
             $this->board[$y] = $row;
@@ -62,9 +58,9 @@ class Board
      * @param $y
      * @return int
      */
-    function countLivingNeighbors($x, $y)
+    function countLivingNeighbors($x, $y): int
     {
-        //Analyzing the living/dead neighboors
+        //Analyzing the living/dead neighbours
         $coordinates = [
             [-1, -1], [-1, 0], [-1, 1],
             [0, -1], [0, 1],
@@ -73,9 +69,9 @@ class Board
         $count = 0;
 
 
-        foreach($coordinates as $coordinate)
+        foreach ($coordinates as $coordinate)
         {
-            if(isset($this->board[$x + $coordinate[0]][$y + $coordinate[1]])
+            if (isset($this->board[$x + $coordinate[0]][$y + $coordinate[1]])
                 && $this->board[$x + $coordinate[0]][$y + $coordinate[1]] == 1)
             {
                 $count++;
@@ -91,17 +87,17 @@ class Board
     {
         $newBoard = [];
 
-        foreach($this->board as $widthID => $width)
+        foreach ($this->board as $widthID => $width)
         {
             $newBoard[$widthID] = [];
-            foreach($width as $heightID => $height)
+            foreach ($width as $heightID => $height)
             {
                 $count = $this->countLivingNeighbors($widthID, $heightID);
 
                 $newValue=null;
-                if($height == 1)
+                if ($height == 1)
                 {
-                    if($count < 2 || $count > 3)
+                    if ($count < 2 || $count > 3)
                     {
                         $newValue=0;
                     } else
@@ -110,7 +106,7 @@ class Board
                     }
                 } else
                 {
-                    if($count == 3)
+                    if ($count == 3)
                     {
                         $newValue = 1;
                     }
@@ -124,13 +120,13 @@ class Board
     }
 
     /**
-     * A glider function wich runs/glides through the whole board.
+     * A glider function which runs/glides through the whole board.
      */
     function createGlider()
     {
-        for($y = 0; $y < $this->height; ++$y) {
+        for ($y = 0; $y < $this->height; ++$y) {
             $row = [];
-            for($x = 0; $x < $this->width; ++$x) {
+            for ($x = 0; $x < $this->width; ++$x) {
                 $row[$x] = 0;
             }
             $this->board[$y] = $row;
@@ -147,13 +143,13 @@ class Board
      */
     function printOutBoard()
     {
-        for($y = 0; $y < $this->height; ++$y)
+        for ($y = 0; $y < $this->height; ++$y)
         {
-            for($x = 0; $x < $this->width; ++$x)
+            for ($x = 0; $x < $this->width; ++$x)
             {
                 //the dead cells
                 $liveOrdead= 0;
-                if($this->board[$y][$x] == 1)
+                if ($this->board[$y][$x] == 1)
 
                     //living cells
                     $liveOrdead=1;
@@ -165,17 +161,16 @@ class Board
     }
 
     /**
-     * @return bool
+     * Check the current board if it has similarity with the previous board.
      *
-     * Stops to create a next generation if the actual generation
-     * is similar to the previous one.
+     * @return bool
      */
-    function stopCreationOfGeneration()
+    function checkBoardOnSimilarities(): bool
     {
             $lastBoard = $this->lastGeneration[count($this->lastGeneration) -1];
             $actualBoard = $this->board;
 
-            if($lastBoard == $actualBoard) return true;
+            if ($lastBoard == $actualBoard) return true;
 
             return false;
     }

@@ -13,7 +13,7 @@ function myAutoload($className) {
 }
 
 /**
- * Excecution of the autoloader
+ * Execution of the autoloader
  */
 spl_autoload_register("myAutoload");
 
@@ -35,13 +35,13 @@ $options = new Getopt([['r', "startRandom", Getopt::NO_ARGUMENT, "Starts the boa
 $options->parse();
 
 
-if($options->getOption("help"))
+if ($options->getOption("help"))
 {
     $options->showHelp();
     die;
 }
 
-if($options->getOption("version"))
+if ($options->getOption("version"))
 {
     echo "Version: 1.0\n";
     die;
@@ -52,12 +52,12 @@ if($options->getOption("version"))
  */
 $width = 5;
 $height = 5;
-if($options->getOption("width"))
+if ($options->getOption("width"))
 {
     $width = $options->getOption("width");
 }
 
-if($options->getOption("height"))
+if ($options->getOption("height"))
 {
     $height = $options->getOption("height");
 }
@@ -66,28 +66,29 @@ if($options->getOption("height"))
  * Total number of generations.
  */
 $maxSteps = 7;
-if($options->getOption("maxSteps"))
+if ($options->getOption("maxSteps"))
 {
     $maxSteps = $options->getOption("maxSteps");
 }
 
 /**
- * Decleration of an instance of the class Board which has two given parameters of the total number for each row and col
+ * Declaration of an instance of the class Board which has two given parameters of the total number for each row and col
+ *
  * @class Board
  */
-$startBoard = new Board($width, $height);
+$board = new Board($width, $height);
 
-if($options->getOption("startRandom"))
+if ($options->getOption("startRandom"))
 {
-    $startBoard->createBoard();
+    $board->createBoard();
 }
 
-if($options->getOption("startGlider"))
+if ($options->getOption("startGlider"))
 {
-    $startBoard->createGlider();
+    $board->createGlider();
 }
 
-//$startBoard->createBoard();
+$board->createBoard();
 
 /**
  * Starts to create the number of generations, which are set in "maxSteps".
@@ -96,11 +97,11 @@ if($options->getOption("startGlider"))
  *
  * The Board stops to generate a next generation if it's similar to the next one.
  */
-for($i = 0; $i < $maxSteps; $i++)
+for ($i = 0; $i < $maxSteps; $i++)
 {
     echo "\nGeneration: ".$i."\n";
-    $startBoard->printOutBoard();
-    $startBoard->calculateNextGeneration();
+    $board->printOutBoard();
+    $board->calculateNextGeneration();
 
-    if($startBoard->stopCreationOfGeneration() == true) break;
+    if ($board->checkBoardOnSimilarities() == true) break;
 }
