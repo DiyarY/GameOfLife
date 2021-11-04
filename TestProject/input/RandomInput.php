@@ -1,7 +1,9 @@
 <?php
 namespace input;
 
-class RandomInput
+use input\BaseInput;
+
+class RandomInput extends BaseInput
 {
 
 }

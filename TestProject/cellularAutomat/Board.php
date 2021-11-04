@@ -148,11 +148,11 @@ class Board
             for ($x = 0; $x < $this->width; ++$x)
             {
                 //the dead cells
-                $liveOrdead= 0;
+                $liveOrdead= "-";
                 if ($this->board[$y][$x] == 1)
 
                     //living cells
-                    $liveOrdead=1;
+                    $liveOrdead="*";
                 echo $liveOrdead;
 
             }

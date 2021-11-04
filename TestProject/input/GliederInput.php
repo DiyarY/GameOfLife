@@ -1,8 +1,9 @@
 <?php
 namespace input;
 
+use input\BaseInput;
 
-class GliederInput
+class GliederInput extends BaseInput
 {
 
 }

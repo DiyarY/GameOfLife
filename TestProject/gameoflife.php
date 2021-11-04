@@ -2,7 +2,6 @@
 use cellularAutomat\Board;
 use options\Getopt;
 
-
 /**
  * Function for Autoloader.
  * @param $className
@@ -50,8 +49,8 @@ if ($options->getOption("version"))
 /**
  * Set the total number for each row and col.
  */
-$width = 5;
-$height = 5;
+$width = 10;
+$height = 10;
 if ($options->getOption("width"))
 {
     $width = $options->getOption("width");
@@ -86,6 +85,30 @@ if ($options->getOption("startRandom"))
 if ($options->getOption("startGlider"))
 {
     $board->createGlider();
+}
+
+/**
+ * Glider starts in the middle of the board.
+ *
+ */
+if($options->getOption("startGlider"))
+{
+    $coordinateForWidth = $width / 2 - 0.6;
+    $coordinateForHeight = $height / 2 - 0.6;
+
+    $y = round($coordinateForWidth, 0);
+    $x = round($coordinateForHeight, 0);
+
+        for($y1 = 0; $y1 < $board->height; ++$y1)
+        {
+            $row = [3];
+            for($x1 = 0; $x1 < $board->width; ++$x1)
+            {
+                $row[$x1] = 0;
+            }
+            $board->board[$y1] = $row;
+        }
+
 }
 
 $board->createBoard();
