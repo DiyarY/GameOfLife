@@ -11,7 +11,6 @@ $height = 10;
 $maxSteps = 20;
 
 /**
- * Function for Autoloader.
  * @param $className
  */
 function myAutoload($className) {
@@ -20,7 +19,7 @@ function myAutoload($className) {
 }
 
 /**
- * Function for the autoloader.
+ * Register the autoloader.
  */
 spl_autoload_register("myAutoload");
 
@@ -34,7 +33,10 @@ $options = new Getopt(
         ['h', "help", Getopt::NO_ARGUMENT, "Shows a help/guide menu"]
     ]);
 
-
+/**
+ * The glob function finds all register all filenames inside
+ * the input directory.
+ */
 $files = glob("input/*.php");
 
 foreach ($files as $file)

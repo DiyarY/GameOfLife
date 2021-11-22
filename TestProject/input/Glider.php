@@ -30,9 +30,9 @@ class Glider extends Base
 
         if ($_options->getOption("gliderPosition"))
         {
-            $arguments = explode(',', $_options->getOption("gliderPosition"));
-            $x = $arguments[0];
-            $y = $arguments[1];
+            $gliderPosition = explode(',', $_options->getOption("gliderPosition"));
+            $x = $gliderPosition[0];
+            $y = $gliderPosition[1];
         }
 
         $_board->setCell($x + 1, $y + 0, 1);
@@ -43,8 +43,11 @@ class Glider extends Base
     }
 
     /**
-     * Adds a required-option, which sets the glider in the given position, which has to be given inside
-     * the CL (-g 4,5 --input Glider).
+     * The user has to enter a required option to set the start position of the glider.
+     * The needed numbers are marked as start coordinates for the x,y position.
+     *
+     * User input over the CL: "-g 3,2 --input Glider".
+     * 3 marks the x coordinate and 2 the y coordinate.
      *
      * @param Getopt $_options
      */
@@ -52,7 +55,7 @@ class Glider extends Base
     {
         $_options->addOptions(
             [
-                ['g', "gliderPosition", Getopt::REQUIRED_ARGUMENT, " Sets the glider on position x/y"]
+                ['g', "gliderPosition", Getopt::REQUIRED_ARGUMENT, " Set the start position of the glider on the coordinates x,y"]
             ]);
     }
 

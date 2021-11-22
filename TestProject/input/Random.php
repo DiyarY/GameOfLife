@@ -41,7 +41,12 @@ class Random extends Base
     }
 
     /**
-     * Sets the filling level of the board (CL-command: -f 100 --input Random).
+     * Sets the filling level of the board.
+     *
+     * The unit of the parameter is marked in percent (%), which doesn't have to be entered additionally
+     * in the CL.
+     *
+     * User input over the CL: "-f 100 --input Random".
      *
      * @param Getopt $_options
      */
@@ -49,7 +54,7 @@ class Random extends Base
     {
         $_options->addOptions(
             [
-                ['f', "fillingLevel", Getopt::REQUIRED_ARGUMENT, " Sets the filling number of living cells"]
+                ['f', "fillingLevel", Getopt::REQUIRED_ARGUMENT, " Sets the filling number of living cells in percent"]
             ]);
     }
 }

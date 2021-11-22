@@ -25,7 +25,8 @@ abstract class Base
     }
 
     /**
-     * Catches the created board.
+     * Prepares the Board that has been already created
+     * for additional pluggable inputs.
      *
      * @param Board $_board
      * @param Getopt $_options

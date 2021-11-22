@@ -37,6 +37,11 @@ class Board
         $this->height=$_height;
         $this->width=$_width;
 
+        /**
+         * The following loop creates the total number of cells
+         * by the given numbers set numbers of the attributes "$height and $width"
+         * which marks the x/y-axis.
+         */
         for ($y = 0; $y < $this->height; ++$y) {
             $row = [];
             for ($x = 0; $x < $this->width; ++$x) {
@@ -217,14 +222,6 @@ class Board
     }
 
     /**
-     * @param $_board
-     */
-    function setBoard($_board)
-    {
-        $this->board[]=$_board;
-    }
-
-    /**
      * @return array[]
      */
     function getBoard(): array
@@ -241,22 +238,6 @@ class Board
     function setCell($_x, $_y, $_value)
     {
         return $this->board[$_x][$_y]= $_value;
-    }
-
-    /**
-     * @param $_lastGeneration
-     */
-    function setLastGeneration($_lastGeneration)
-    {
-        $this->lastGeneration[]=$_lastGeneration;
-    }
-
-    /**
-     * @return array
-     */
-    function getLastGeneration(): array
-    {
-        return $this->lastGeneration;
     }
 
 }
