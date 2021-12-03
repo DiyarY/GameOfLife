@@ -33,10 +33,7 @@ $options = new Getopt(
         ['h', "help", Getopt::NO_ARGUMENT, "Shows a help/guide menu"]
     ]);
 
-/**
- * The glob function finds all register all filenames inside
- * the input directory.
- */
+//The glob function finds all register all filenames inside the input directory.
 $files = glob("input/*.php");
 
 foreach ($files as $file)

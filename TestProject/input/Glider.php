@@ -41,7 +41,7 @@ class Glider extends Base
         $_board->setCell($x + 2, $y + 2, 1);
     }
 
-    /*
+    /**
      * The user has to enter a required option to set the start position of the glider.
      * The needed numbers are marked as start coordinates for the x,y position.
      *
