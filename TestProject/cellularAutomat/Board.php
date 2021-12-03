@@ -37,11 +37,7 @@ class Board
         $this->height=$_height;
         $this->width=$_width;
 
-        /**
-         * The following loop creates the total number of cells
-         * by the given numbers set numbers of the attributes "$height and $width"
-         * which marks the x/y-axis.
-         */
+        //Creates a new Board by the set number of the attributes $height and $width, which marks the x/y-axis
         for ($y = 0; $y < $this->height; ++$y) {
             $row = [];
             for ($x = 0; $x < $this->width; ++$x) {

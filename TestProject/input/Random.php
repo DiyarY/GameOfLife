@@ -40,7 +40,7 @@ class Random extends Base
         }
     }
 
-    /**
+    /*
      * Sets the filling level of the board.
      *
      * The unit of the parameter is marked in percent (%), which doesn't have to be entered additionally

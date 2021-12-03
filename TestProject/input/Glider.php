@@ -30,9 +30,8 @@ class Glider extends Base
 
         if ($_options->getOption("gliderPosition"))
         {
-            $gliderPosition = explode(',', $_options->getOption("gliderPosition"));
-            $x = $gliderPosition[0];
-            $y = $gliderPosition[1];
+            //Startpoint coordinates (x/y-axis) for the glider
+            list($x,$y) = explode(',',$_options->getOption("gliderPosition"));
         }
 
         $_board->setCell($x + 1, $y + 0, 1);
@@ -42,7 +41,7 @@ class Glider extends Base
         $_board->setCell($x + 2, $y + 2, 1);
     }
 
-    /**
+    /*
      * The user has to enter a required option to set the start position of the glider.
      * The needed numbers are marked as start coordinates for the x,y position.
      *
