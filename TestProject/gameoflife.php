@@ -33,12 +33,23 @@ $options = new Getopt(
         ['h', "help", Getopt::NO_ARGUMENT, "Shows a help/guide menu"]
     ]);
 
-//The glob function finds all register all filenames inside the input directory.
-$files = glob("input/*.php");
 
+/*
+ * To ensure that the options Glider and Random can be set inside the command line -
+ * (--input Glider / --input Random) - it's important that the classname matches with the set
+ * command, otherwise the command can't be executed.
+ */
+
+//The classes inside the input directory are going  to initialize and returned as array values
+$files = glob("input/*.php");
+var_dump($files);
+
+//Runs through the whole input path and initialize the class-files
 foreach ($files as $file)
 {
+    //Removes the datatype -> .php from the class file
     $baseClassName = basename($file, ".php");
+    //Initializing the input path with their class files but without their respective datatype -> .php
     $className = "input\\$baseClassName";
 
     if ($className == Base::class) continue;
