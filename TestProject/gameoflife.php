@@ -42,7 +42,6 @@ $options = new Getopt(
 
 //The classes inside the input directory are going  to initialize and returned as array values
 $files = glob("input/*.php");
-var_dump($files);
 
 //Runs through the whole input path and initialize the class-files
 foreach ($files as $file)
