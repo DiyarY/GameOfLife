@@ -18,13 +18,13 @@ class Board
     /**
      * @var $height
      * @var $width
-     * @var $board
-     * @var $lastGeneration
+     * @var $board = [[]]
+     * @var $lastGeneration = []
      */
-    public $height;
-    public $width;
-    public $board = [[]];
-    public $lastGeneration = [];
+    private $height;
+    private $width;
+    private $board = [[]];
+    private $lastGeneration = [];
 
     /**
      * Set the total numbers of the rows and cols.
@@ -36,6 +36,16 @@ class Board
     {
         $this->height=$_height;
         $this->width=$_width;
+
+        //Creates a new Board by the set number of the attributes $height and $width, which marks the x/y-axis
+        for ($y = 0; $y < $this->height; ++$y) {
+            $row = [];
+            for ($x = 0; $x < $this->width; ++$x) {
+                $this->board[$y][$x] = 0;
+                $row[$x] = 0;
+            }
+            $this->board[$y] = $row;
+        }
     }
 
     /**
@@ -148,11 +158,11 @@ class Board
             for ($x = 0; $x < $this->width; ++$x)
             {
                 //the dead cells
-                $liveOrdead= 0;
+                $liveOrdead= " - ";
                 if ($this->board[$y][$x] == 1)
 
                     //living cells
-                    $liveOrdead=1;
+                    $liveOrdead=" * ";
                 echo $liveOrdead;
 
             }
@@ -173,6 +183,57 @@ class Board
             if ($lastBoard == $actualBoard) return true;
 
             return false;
+    }
+
+    /**
+     * @param $_height
+     */
+    function setHeight($_height)
+    {
+        $this->height=$_height;
+    }
+
+    /**
+     * @return int
+     */
+    function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param $_width
+     */
+    function setWidth($_width)
+    {
+        $this->width=$_width;
+    }
+
+    /**
+     * @return int
+     */
+    function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    /**
+     * @return array[]
+     */
+    function getBoard(): array
+    {
+        return $this->board;
+    }
+
+    /**
+     * @param $_x
+     * @param $_y
+     * @param $_value
+     * @return mixed
+     */
+    function setCell($_x, $_y, $_value)
+    {
+        return $this->board[$_x][$_y]= $_value;
     }
 
 }
