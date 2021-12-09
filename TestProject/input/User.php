@@ -17,38 +17,54 @@ use options\Getopt;
 class User extends Base
 {
     /**
-     * Prepares an empty board where the coordinates for the x/-axis has to be given, so the wished
-     * cell is set on alive but the rest cells are dead.
+     * Prepares an empty board where the coordinates for the x/-axis has to be entered, so the wished
+     * cell can be set as living cell where the rest are staying dead.
      *
-     * CL-example: php gameoflife.php -i User 3,6
+     * While the process is running, the user will be asked to enter the coordinates which could look
+     * like the following example: 3,3 \Enter\.
      *
-     * After the user set the coordinates, type -> finish so the process can be executed.
+     * After the user set the coordinates, type -> finish - to execute the process.
      *
      * @param Board $_board
      * @param Getopt $_options
      */
     public function fillBoard(Board $_board, Getopt $_options)
     {
-        echo "Enter the coordinates for the x/y-axis like in the following example: -i User 3,6 (Enter)
-              After set the coordinates type -> finish to run the process.";
+        echo "Enter the coordinates for the x/y-axis. 
+              Example: 3,6 \"Enter\" - the cell on the x-coordinate: 3 and y:-coordinate: 6 is set alive(1), while the rest is set dead(0). 
+              After set the coordinates type -> finish \"Enter\" - so the process can be executed.\n";
 
-        while (true)
-        {
+        while (true) {
+
             $commandLineInput = readline("Enter the coordinate for the x/y-axis: ");
 
             if ($commandLineInput == "finish") break;
 
             $startCoordinates = explode(",", $commandLineInput);
 
-            if (count($startCoordinates) == 2)
-
-                for ($y = 0; $y < $_board->getHeight(); ++$y)
+            /*
+             * Runs through the $startCoordinates array to check whether it contains a numerical string, where the
+             * first numerical-string-value represents the x-coordinate and the second the y-coordinate.
+             *
+             * If the user enters a string instead of two integers for the x/y-coordinate, which are seperated by a comma,
+             * a warning message is printed, with an example how the coordinates actually should be set.
+             */
+            foreach($startCoordinates as $coordinate) {
+                //Checks for a numerical string
+                if(ctype_digit($coordinate))
                 {
-                    for ($x = 0; $x < $_board->getWidth(); ++$x)
-                    {
+                    //Given coordinates for the x/y-axis is set on alive(1)
+                    if (count($startCoordinates) == 2) {
                         $_board->setCell($startCoordinates[0], $startCoordinates[1], 1);
                     }
                 }
+                //Prints a warning message with an example how the coordinates actually should be set
+                elseif(filter_var($coordinate, FILTER_SANITIZE_STRING))
+                {
+                    echo "WARNING! Please enter two integer numbers for the x/y coordinate, for instance like that -> 3,3 \"Enter\"\n";
+                    break;
+                }
+            }
         }
 
     }
