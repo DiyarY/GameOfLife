@@ -7,7 +7,7 @@ use cellularAutomat\Board;
 use options\Getopt;
 
 /**
- * The User can set a cell alive over a specific command in the command line.
+ * The user is prompted to enter cells that are alive.
  *
  * To do so an empty board is given where the user have to set the coordinates over the command line
  * so the given cell coordinate is set alive but all the other cells are dead.
@@ -49,23 +49,20 @@ class User extends Base
              * If the user enters a string instead of two integers for the x/y-coordinate, which are seperated by a comma,
              * a warning message is printed, with an example how the coordinates actually should be set.
              */
-            foreach($startCoordinates as $coordinate) {
+            foreach ($startCoordinates as $coordinate) {
                 //Checks for a numerical string
-                if(ctype_digit($coordinate))
-                {
+                if (ctype_digit($coordinate)) {
                     //Given coordinates for the x/y-axis is set on alive(1)
                     if (count($startCoordinates) == 2) {
                         $_board->setCell($startCoordinates[0], $startCoordinates[1], 1);
                     }
-                }
-                //Prints a warning message with an example how the coordinates actually should be set
-                elseif(filter_var($coordinate, FILTER_SANITIZE_STRING))
-                {
+                } //Prints a warning message with an example how the coordinates actually should be set
+                elseif (filter_var($coordinate, FILTER_SANITIZE_STRING)) {
                     echo "WARNING! Please enter two integer numbers for the x/y coordinate, for instance like that -> 3,3 \"Enter\"\n";
-                    break;
+                    error_reporting(E_ERROR);
+                    break 2;
                 }
             }
         }
-
     }
 }
