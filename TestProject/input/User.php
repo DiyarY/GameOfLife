@@ -57,7 +57,7 @@ class User extends Base
                         $_board->setCell($startCoordinates[0], $startCoordinates[1], 1);
                     }
                 } //Prints a warning message with an example how the coordinates actually should be set
-                elseif (filter_var($coordinate, FILTER_SANITIZE_STRING)) {
+                else if (filter_var($coordinate, FILTER_SANITIZE_STRING)) {
                     echo "WARNING! Please enter two integer numbers for the x/y coordinate, for instance like that -> 3,3 \"Enter\"\n";
                     error_reporting(E_ERROR);
                     break 2;
