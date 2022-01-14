@@ -26,6 +26,7 @@ spl_autoload_register("myAutoload");
 $options = new Getopt(
     [
         ['i', "input", Getopt::REQUIRED_ARGUMENT, " Which input should be used to fill the board"],
+        ['o', "output", Getopt::REQUIRED_ARGUMENT, "Which output should be used"],
         ['w', "width", Getopt::REQUIRED_ARGUMENT, "Sets the width of the board"],
         ['e', "height", Getopt::REQUIRED_ARGUMENT, "Sets the height of the board"],
         ['s', "maxSteps", Getopt::REQUIRED_ARGUMENT, "Sets the number of the generations"],
