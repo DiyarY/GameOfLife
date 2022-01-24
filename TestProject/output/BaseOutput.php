@@ -15,12 +15,11 @@ class BaseOutput
     {
     }
 
-    function outputBoard(Board $_board)
-    {
-    }
+     function outputBoard(Board $_board)
+     {
+     }
 
     function finishOutput()
     {
     }
-
 }

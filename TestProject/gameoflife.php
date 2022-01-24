@@ -6,6 +6,10 @@ use input\Base;
 use input\Glider;
 use input\Random;
 
+use output\BaseOutput;
+use output\ConsoleOutput;
+use output\PNGOutput;
+
 $width = 10;
 $height = 10;
 $maxSteps = 20;
@@ -111,6 +115,22 @@ if (class_exists($className))
     else die ("Requested input $requestedInput does not inherit from input\\Base!\n");
 }
 else die ("Could not find input $requestedInput!\n");
+
+
+//Initialize and return the defined classes inside the output directory
+$requestedOutput = $options->getOption("output") ?? "ConsoleOutput";
+$classNameForOutput = "output\\$requestedOutput";
+
+if(class_exists($classNameForOutput))
+{
+    $output = new $classNameForOutput;
+    if($output instanceof BaseOutput)
+    {
+        $output->outputBoard($board);
+    }
+    else die ("Requested output $requestedOutput doesn't inherit from output\\BaseOutput!\m");
+}
+else die ("Could not find output $requestedOutput!\n");
 
 
 for ($i = 0; $i < $maxSteps; $i++)
