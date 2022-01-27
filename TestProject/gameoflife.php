@@ -127,6 +127,7 @@ if(class_exists($classNameForOutput))
     if($output instanceof BaseOutput)
     {
         $output->outputBoard($board);
+        $output->finishOutput();
     }
     else die ("Requested output $requestedOutput doesn't inherit from output\\BaseOutput!\m");
 }
