@@ -1,0 +1,4 @@
+imageOutput/
+*.png
+*.gif
+.idea/

@@ -6,20 +6,20 @@ use options\Getopt;
 use cellularAutomat\Board;
 
 /**
- * Creates a png-image of the Board that are going to be saved under -> TestPorject/imageOutput/*.png
- *
- * Enter following command to run \"PNGOutput.php\" -> \"--output PNGOutput\" or \"-o PNGOutput\"
+ * Creates an image of the current created board in png-format.
  *
  * @class PNGOutput
  */
 class PNGOutput extends BaseOutput
 {
+    private $imageIndex = 0;
+
     /**
-     * Creates a png-image of the Board which is saved under -> TestProject/imageOutput/*.png .
+     * Creates an image of the current created board in png-format.
      *
      * The living cells are represented by small rectangles.
      *
-     * @param Board $_board
+     * @param Board $_board Prepares the current board.
      */
       function outputBoard(Board $_board)
       {
@@ -38,7 +38,7 @@ class PNGOutput extends BaseOutput
               }
           }
 
-          //Creates a new image which is going to be saved under -> TestProject/imageOutput/*.png
+          //Creates a new image in png-format
           imagepng($pngImage, "imageOutput/" . sprintf("image-%03d", $this->imageIndex) . ".png");
           $this->imageIndex++;
       }

@@ -28,7 +28,7 @@ ___
 ***Living cells are marked with 1 and dead cells with 0***
 
 ```PHP
-    Generation: 0
+Generation: 0
 01000011
 00000001
 10011000
@@ -58,3 +58,11 @@ Generation: 2
 10110101
 01111110
 ```
+___
+
+### Animated-gif of the board
+
+Use following command to create an animated-gif of the board:
+>--output GifOutput
+
+![bg](imageOutput/animation.gif)

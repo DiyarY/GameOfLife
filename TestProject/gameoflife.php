@@ -1,14 +1,9 @@
 <?php
+
 use cellularAutomat\Board;
 use options\Getopt;
-
 use input\Base;
-use input\Glider;
-use input\Random;
-
 use output\BaseOutput;
-use output\ConsoleOutput;
-use output\PNGOutput;
 
 $width = 10;
 $height = 10;
@@ -121,13 +116,12 @@ else die ("Could not find input $requestedInput!\n");
 $requestedOutput = $options->getOption("output") ?? "ConsoleOutput";
 $classNameForOutput = "output\\$requestedOutput";
 
-if(class_exists($classNameForOutput))
+if (class_exists($classNameForOutput))
 {
     $output = new $classNameForOutput;
-    if($output instanceof BaseOutput)
+    if ($output instanceof BaseOutput)
     {
-        $output->outputBoard($board);
-        $output->finishOutput();
+        $output->startOutput($options);
     }
     else die ("Requested output $requestedOutput doesn't inherit from output\\BaseOutput!\m");
 }
@@ -137,7 +131,8 @@ else die ("Could not find output $requestedOutput!\n");
 for ($i = 0; $i < $maxSteps; $i++)
 {
     echo "\nGeneration: ".$i."\n";
-    $board->printOutBoard();
+    $output->outputBoard($board);
+    $output->finishOutput();
     $board->calculateNextGeneration();
 
     if ($board->checkBoardOnSimilarities() == true) break;

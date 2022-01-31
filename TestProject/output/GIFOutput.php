@@ -7,25 +7,25 @@ use cellularAutomat\Board;
 use GifAnimation\GifCreator;
 
 /**
- * Creates an animated gif-file of the board by hand of the created images that are saved under -> TestProject/imageOutput/*.png.
- *
- * Enter following command to run \"GifOutput.php\" -> \"--output GifOutput\" or \"-o GifOutput.php\"
+ * An animated gif-file is automatically created by hand of the created images from the board.
  *
  * @class GifOutput
  */
 class GIFOutput extends BaseOutput
 {
+    private $imageIndex = 0;
+
     /**
-     * Creates a png-image of the board which is saved under -> TestProject/imageOutput/*.png .
+     * Creates a png-image of the board which is saved under.
      *
      * The living cells are represented by small rectangles.
      *
-     * @param Board $_board
+     * @param Board $_board Prepares the board.
      */
     function outputBoard(Board $_board)
     {
         $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
-        imagecolorallocate($pngImage, 100, 100, 100);
+        imagecolorallocate($pngImage, 200, 150, 100);
         $cellColor = imagecolorallocate($pngImage, 10, 10, 10);
 
         //Creates the living cells
@@ -39,23 +39,22 @@ class GIFOutput extends BaseOutput
             }
         }
 
-        //Creates a new image which is going to be saved under -> TestProject/imageOutput/*.png
+        //Creates a new image in png-format
         imagepng($pngImage, "imageOutput/" . sprintf("image-%03d", $this->imageIndex) . ".png");
         $this->imageIndex++;
     }
 
     /**
-     * Creates a gif-file that is going to be saved under -> TestProject/imageOutput/*.gif
+     * A gif-file is automatically created by hand of the created images from the board.
      */
     function finishOutput()
     {
         $gif = new GifCreator();
 
-        //Throws the respective error-message for an incorrect process function process
+        //Throws the respective error-message for an incorrect function process
         try {
-            //Creates a gif of the created image-files under -> TestProject/imageOutput/*.png
+            //An animated gif is automatically created and saved under the respective repository.
             $gif->create(glob("imageOutput/*.png"), 50, 0);
-            //Saves the gif inside the respective directory
             file_put_contents("imageOutput/animation.gif", $gif->getGif());
         }
         catch (\Exception $e)
