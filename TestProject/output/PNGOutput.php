@@ -39,7 +39,7 @@ class PNGOutput extends BaseOutput
           }
 
           //Creates a new image in png-format
-          imagepng($pngImage, "imageOutput/" . sprintf("image-%03d", $this->imageIndex) . ".png");
+          imagepng($pngImage, "imageOutput/" . sprintf("pngImage-%03d", $this->imageIndex) . ".png");
           $this->imageIndex++;
       }
 }

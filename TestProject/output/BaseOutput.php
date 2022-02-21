@@ -5,24 +5,15 @@ use options\Getopt;
 use cellularAutomat\Board;
 
 /**
- * To run one of the three classes - not BaseOutput.php - use following commands over the command line:
- * \"--output PNGOutput\"   \"--output GifOutput\"   \"--output ConsoleOutput\"
+ * BaseOutput provides functions for pluggable outputs.
  *
- * To print the current created board, \"outputBoard(Board $_board) must\"
- * be used which is defined under -> ConsoleOutput.
+ * /"addOptions(Getopt $_options)/" allows an output to define additional, output specific options.
  *
- * To implement an image in png-format, \"outputBoard(Board $_board)\" must be used by help
- * of the gd-library, which provides the needed functions to create and customise an image, which is defined
- * under -> PNGOutput.
+ * /"startOutput(Getopt $_options)/" initialize and starts the respective output.
  *
- * To implement an animated gif of the board, \"finishOutput()\" must be used which is defined
- * under -> GifOutput.
+ * /"outputBoard(Board $_board)/" prints out the current board.
  *
- * \"startOutput(Getop $_options)\" makes it possible to initialize and create the correct output. In addition, it checks
- * for required options, passed as command-line arguments when running gameoflife.
- *
- * To implement additional, output-specific options, \"addOptions(Getopt $_options)\" must be used. These options can
- * be passed as command-line arguments for all outputs, that requires an option.
+ * /"finishOutput(Getopt $_options)/" finishes the output of a gif-animation.
  *
  * @class BasOutput
  */

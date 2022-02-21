@@ -25,8 +25,8 @@ class GIFOutput extends BaseOutput
     function outputBoard(Board $_board)
     {
         $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
-        imagecolorallocate($pngImage, 200, 150, 100);
-        $cellColor = imagecolorallocate($pngImage, 10, 10, 10);
+        imagecolorallocate($pngImage, 255, 255, 255);
+        $cellColor = imagecolorallocate($pngImage, 0, 0, 0);
 
         //Creates the living cells
         for ($y = 0; $y < $_board->getHeight(); ++$y)
@@ -40,7 +40,7 @@ class GIFOutput extends BaseOutput
         }
 
         //Creates a new image in png-format
-        imagepng($pngImage, "imageOutput/" . sprintf("image-%03d", $this->imageIndex) . ".png");
+        imagepng($pngImage, "imageOutput/" . sprintf("pngImage-%03d", $this->imageIndex) . ".png");
         $this->imageIndex++;
     }
 
@@ -55,7 +55,13 @@ class GIFOutput extends BaseOutput
         try {
             //An animated gif is automatically created and saved under the respective repository.
             $gif->create(glob("imageOutput/*.png"), 50, 0);
-            file_put_contents("imageOutput/animation.gif", $gif->getGif());
+            file_put_contents("imageOutput/gifAnimation.gif", $gif->getGif());
+
+            //Deletes all current images
+            foreach (glob("imageOutput/pngImage.png") as $filename)
+            {
+                unlink($filename);
+            }
         }
         catch (\Exception $e)
         {

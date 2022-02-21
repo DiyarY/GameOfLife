@@ -20,10 +20,15 @@ class ConsoleOutput extends BaseOutput
      */
     function outputBoard(Board $_board)
     {
+        $board = $_board->getBoard();
+
         for ($y = 0; $y < $_board->getHeight(); ++$y) {
             for ($x = 0; $x < $_board->getWidth(); ++$x) {
-                $_board->printOutBoard();
+                $currentBoard = $board[$x][$y] ? " * " : " - ";
+                echo $currentBoard;
             }
+            echo "\n";
         }
+        echo "\n";
     }
 }

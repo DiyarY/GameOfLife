@@ -132,8 +132,9 @@ for ($i = 0; $i < $maxSteps; $i++)
 {
     echo "\nGeneration: ".$i."\n";
     $output->outputBoard($board);
-    $output->finishOutput();
     $board->calculateNextGeneration();
 
     if ($board->checkBoardOnSimilarities() == true) break;
 }
+
+$output->finishOutput();

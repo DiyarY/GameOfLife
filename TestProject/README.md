@@ -2,7 +2,8 @@
 ___
 
 
-###Genral infos about the Game of Life <br><br>
+#Genral infos about the Game of Life <br><br>
+
 If you're unfamiliar with the Conways Game of Life then checkout the Wikipedia Link below <br>
 where you'll find all needed information for it:
 
@@ -10,7 +11,7 @@ where you'll find all needed information for it:
 > German version: https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens
 ___
 
-###Rules
+##Rules
 
 Conways Game of Life is two-dimensional grid of squares and cells, where each cell <br>
 has two possible states, alive or dead. Each cell interacts with its eight neighbours, <br>
@@ -23,44 +24,70 @@ which are the cells that are horizontally, vertically or diagonally adjacent.
 ___
 
 
-###Output of the grid and generations
+##Output of the grid and generations
 
-***Living cells are marked with 1 and dead cells with 0***
+***Living cells are marked with " * " and dead cells with " - "***
 
 ```PHP
 Generation: 0
-01000011
-00000001
-10011000
-00100000
-01000110
-10110101
-10111101
-01000010
+ -  -  -  -  -  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+ -  *  *  -  -  -  -  -  -  -
+ *  *  -  *  -  -  -  -  -  -
+ -  -  *  -  *  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+ -  -  -  *  *  -  -  -  -  -
+ -  -  -  *  -  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+
 
 Generation: 1
-00000011
-00000011
-00010000
-01111100
-01011110
-10000001
-10000101
-01111110
+ -  -  -  -  -  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+ *  *  *  -  -  -  -  -  -  -
+ *  -  -  *  -  -  -  -  -  -
+ -  *  *  *  -  -  -  -  -  -
+ -  -  -  -  *  -  -  -  -  -
+ -  -  -  *  *  -  -  -  -  -
+ -  -  -  *  *  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+
 
 Generation: 2
-00000011
-00000011
-00010110
-01000010
-11000010
-11000001
-10110101
-01111110
+ -  -  -  -  -  -  -  -  -  -
+ -  *  -  -  -  -  -  -  -  -
+ *  *  *  -  -  -  -  -  -  -
+ *  -  -  *  -  -  -  -  -  -
+ -  *  *  *  *  -  -  -  -  -
+ -  -  -  -  *  -  -  -  -  -
+ -  -  -  -  -  *  -  -  -  -
+ -  -  -  *  *  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+ -  -  -  -  -  -  -  -  -  -
+
 ```
 ___
 
-### Animated-gif of the board
+## Creation of a gif
+
+The following class helps you to create an animated GIf, from multiple already created images of <br>
+all generated boards:
+
+>TestProjects/output/GIFOutput.php
+>
+> CLI-command: --output GifOutput
+
+## Creation of a png image 
+
+The following class helps you to create multiple images of all generated boards:
+
+>TestProject/output/PNGOutput.php
+> 
+> CLI-command: --output PNGOutput
+___
+## Animated-gif of the board
 
 Use following command to create an animated-gif of the board:
 >--output GifOutput
