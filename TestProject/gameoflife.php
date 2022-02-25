@@ -1,10 +1,9 @@
 <?php
+
 use cellularAutomat\Board;
 use options\Getopt;
-
 use input\Base;
-use input\Glider;
-use input\Random;
+use output\BaseOutput;
 
 $width = 10;
 $height = 10;
@@ -26,6 +25,7 @@ spl_autoload_register("myAutoload");
 $options = new Getopt(
     [
         ['i', "input", Getopt::REQUIRED_ARGUMENT, " Which input should be used to fill the board"],
+        ['o', "output", Getopt::REQUIRED_ARGUMENT, "Which output should be used"],
         ['w', "width", Getopt::REQUIRED_ARGUMENT, "Sets the width of the board"],
         ['e', "height", Getopt::REQUIRED_ARGUMENT, "Sets the height of the board"],
         ['s', "maxSteps", Getopt::REQUIRED_ARGUMENT, "Sets the number of the generations"],
@@ -112,11 +112,29 @@ if (class_exists($className))
 else die ("Could not find input $requestedInput!\n");
 
 
+//Initialize and return the defined classes inside the output directory
+$requestedOutput = $options->getOption("output") ?? "ConsoleOutput";
+$classNameForOutput = "output\\$requestedOutput";
+
+if (class_exists($classNameForOutput))
+{
+    $output = new $classNameForOutput;
+    if ($output instanceof BaseOutput)
+    {
+        $output->startOutput($options);
+    }
+    else die ("Requested output $requestedOutput doesn't inherit from output\\BaseOutput!\m");
+}
+else die ("Could not find output $requestedOutput!\n");
+
+
 for ($i = 0; $i < $maxSteps; $i++)
 {
     echo "\nGeneration: ".$i."\n";
-    $board->printOutBoard();
+    $output->outputBoard($board);
     $board->calculateNextGeneration();
 
     if ($board->checkBoardOnSimilarities() == true) break;
 }
+
+$output->finishOutput();
