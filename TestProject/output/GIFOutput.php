@@ -40,7 +40,7 @@ class GIFOutput extends BaseOutput
         }
 
         //Creates a new image in png-format
-        imagepng($pngImage, "imageOutput/" . sprintf("pngImage-%03d", $this->imageIndex) . ".png");
+        imagepng($pngImage, "imageOutput/" . sprintf("gif-frame-%03d", $this->imageIndex) . ".png");
         $this->imageIndex++;
     }
 
@@ -54,11 +54,11 @@ class GIFOutput extends BaseOutput
         //Throws the respective error-message for an incorrect function process
         try {
             //An animated gif is automatically created and saved under the respective repository.
-            $gif->create(glob("imageOutput/*.png"), 50, 0);
-            file_put_contents("imageOutput/gifAnimation.gif", $gif->getGif());
+            $gif->create(glob("imageOutput/gif-frame-*.png"), 100, 0);
+            file_put_contents("imageOutput/gif-output.gif", $gif->getGif());
 
             //Deletes all current images
-            foreach (glob("imageOutput/pngImage.png") as $filename)
+            foreach (glob("imageOutput/gif-frame-*.png") as $filename)
             {
                 unlink($filename);
             }

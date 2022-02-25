@@ -92,4 +92,4 @@ ___
 Use following command to create an animated-gif of the board:
 >--output GifOutput
 
-![bg](imageOutput/animation.gif)
+![bg](imageOutput/gif-output.gif)
