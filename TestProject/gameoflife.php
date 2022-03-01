@@ -63,6 +63,35 @@ foreach ($files as $file)
     }
 }
 
+/*
+ * To ensure that the options gifCellSize and gifCellColor can be set inside the command line ->
+ * \"--output GifOutput\" - it's important that the classname matches with the set
+ * command, otherwise the option can't be executed.
+ */
+
+//The classes inside the output directory are going to be initialized and returned as array values
+$filesInOutput = glob("output/*.php");
+
+//Runs through the whole output path and initialize the class.php files
+foreach ($filesInOutput as $file)
+{
+    //Removes the datatype -> .php from the class file
+    $baseClassName = basename($file, ".php");
+    //Initialize the output path with its class files but without respective data-format -> .php
+    $className = "output\\$baseClassName";
+
+    if ($className == BaseOutput::class) continue;
+
+    if (class_exists($className))
+    {
+        $output = new $className;
+        if ($output instanceof BaseOutput)
+        {
+            $output->addOptions($options);
+        }
+    }
+}
+
 
 $options->parse();
 

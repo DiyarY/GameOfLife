@@ -14,6 +14,8 @@ use GifAnimation\GifCreator;
 class GIFOutput extends BaseOutput
 {
     private $imageIndex = 0;
+    private $cellSize = 5;
+    private $gifCellColor = [0, 0, 0];
 
     /**
      * Creates a png-image of the board which is saved under.
@@ -24,9 +26,12 @@ class GIFOutput extends BaseOutput
      */
     function outputBoard(Board $_board)
     {
+        $cellSize = $this->cellSize;
+        $gifCellColor = $this->gifCellColor;
+
         $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
         imagecolorallocate($pngImage, 255, 255, 255);
-        $cellColor = imagecolorallocate($pngImage, 0, 0, 0);
+        $cellColor = imagecolorallocate($pngImage, intval($gifCellColor[0]), intval($gifCellColor[1]), intval($gifCellColor[2]));
 
         //Creates the living cells
         for ($y = 0; $y < $_board->getHeight(); ++$y)
@@ -35,7 +40,8 @@ class GIFOutput extends BaseOutput
             {
                 //Set color for the living cells
                 if ($_board->setCell($x, $y, rand(0, 1)))
-                    imagefilledrectangle($pngImage, $x * 5, $y * 5, $x * 5 + 5 - 5, $y * 5 + 5 - 5, $cellColor);
+                    imagefilledrectangle($pngImage, $x * $cellSize, $y * $cellSize, $x * $cellSize +
+                        $cellSize - 5, $y * $cellSize + $cellSize - 5, $cellColor);
             }
         }
 
@@ -69,4 +75,47 @@ class GIFOutput extends BaseOutput
         }
     }
 
+    /**
+     * Defines output-specific parameters, which are required when calling one of the following options ->
+     * \"gifCellSize\ or \"gifCellColor\"
+     *
+     * @param Getopt $_options Defines output-specific parameters
+     */
+    function startOutput(Getopt $_options)
+    {
+        if ($_options->getOption("gifCellSize"))
+        {
+            $this->cellSize = intval($_options->getOption("gifCellSize"));
+
+            if ($this->cellSize <= 0)
+                $this->cellSize = 5;
+        }
+
+        if ($_options->getOption("gifCellColor"))
+        {
+            $this->gifCellColor = explode(",", $_options->getOption("gifCellColor"));
+        }
+    }
+
+
+    /**
+     *\"gifCellSize\" set the size for each cell and needs to be defined in pixel format -> 10 for example.
+     * Short option command: -p 10
+     * Long option command: --gifCellSize
+     *
+     * \"gifCellColor\" set the color for each cell where the colors for red, green, blue needs a number -> between 0-255
+     * and seperated with a comma.
+     * Short command: -c 155,155,155
+     * Long command: -gifCellColor 155,155,155
+     *
+     * @param Getopt $_options Defines output-specific options
+     */
+    function addOptions(Getopt $_options)
+    {
+        $_options->addOptions(
+            [
+                ['p', "gifCellSize", Getopt::REQUIRED_ARGUMENT, " Set the size of a single cell inside of a gif-output in pixel format"],
+                ['c', "gifCellColor", Getopt::REQUIRED_ARGUMENT, " Set the color fo a single cell inside a gif-output"]
+            ]);
+    }
 }
