@@ -25,6 +25,8 @@ class Board
     private $width;
     private $board = [[]];
     private $lastGeneration = [];
+    //Phase 4 - K. A. 3 - code debugging
+    private $value;
 
     /**
      * Set the total numbers of the rows and cols.

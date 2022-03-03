@@ -28,6 +28,7 @@ class GIFOutput extends BaseOutput
     {
         $cellSize = $this->cellSize;
         $gifCellColor = $this->gifCellColor;
+        $board = $_board->getBoard();
 
         $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
         imagecolorallocate($pngImage, 255, 255, 255);
@@ -39,7 +40,7 @@ class GIFOutput extends BaseOutput
             for ($x = 0; $x < $_board->getWidth(); ++$x)
             {
                 //Set color for the living cells
-                if ($_board->setCell($x, $y, rand(0, 1)))
+                if($board[$x][$y] == 1)
                     imagefilledrectangle($pngImage, $x * $cellSize, $y * $cellSize, $x * $cellSize +
                         $cellSize - 5, $y * $cellSize + $cellSize - 5, $cellColor);
             }
@@ -77,7 +78,7 @@ class GIFOutput extends BaseOutput
 
     /**
      * Defines output-specific parameters, which are required when calling one of the following options ->
-     * \"gifCellSize\ or \"gifCellColor\"
+     * \"gifCellSize\" or \"gifCellColor\"
      *
      * @param Getopt $_options Defines output-specific parameters
      */
@@ -92,13 +93,13 @@ class GIFOutput extends BaseOutput
         }
 
         if ($_options->getOption("gifCellColor"))
-        {
             $this->gifCellColor = explode(",", $_options->getOption("gifCellColor"));
-        }
     }
 
 
     /**
+     * Adds gif-specific outputs options.
+     *
      *\"gifCellSize\" set the size for each cell and needs to be defined in pixel format -> 10 for example.
      * Short option command: -p 10
      * Long option command: --gifCellSize
@@ -114,8 +115,9 @@ class GIFOutput extends BaseOutput
     {
         $_options->addOptions(
             [
-                ['p', "gifCellSize", Getopt::REQUIRED_ARGUMENT, " Set the size of a single cell inside of a gif-output in pixel format"],
-                ['c', "gifCellColor", Getopt::REQUIRED_ARGUMENT, " Set the color fo a single cell inside a gif-output"]
-            ]);
+                ['p', "gifCellSize", Getopt::REQUIRED_ARGUMENT, " Set the size for each cell inside of a gif-output in pixel-format -> CLI-command: \"-p 10\" or \"--gifCellSize 10\""],
+                ['c', "gifCellColor", Getopt::REQUIRED_ARGUMENT, " Set the color for each cell inside a gif-output in rgb-format -> CLI-command: \"-c 14,155,14\" or \"--gifCellColor 14,14,14\""]
+            ]
+        );
     }
 }
