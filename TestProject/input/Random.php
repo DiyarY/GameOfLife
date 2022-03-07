@@ -54,7 +54,7 @@ class Random extends Base
     {
         $_options->addOptions(
             [
-                ['f', "fillingLevel", Getopt::REQUIRED_ARGUMENT, " Sets the filling number of living cells in percent"]
+                ['f', "fillingLevel", Getopt::REQUIRED_ARGUMENT, " Sets the filling number of living cells in percent -> CLI-command: \"-f 100\" or \"--fillingLevel 100\""]
             ]);
     }
 }
