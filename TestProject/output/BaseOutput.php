@@ -17,7 +17,7 @@ use cellularAutomat\Board;
  *
  * @class BasOutput
  */
-class BaseOutput
+abstract class BaseOutput
 {
     /**
      * Allows an output to define additional, output specific options, that can be passed as required command-line
