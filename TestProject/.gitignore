@@ -1,7 +1,7 @@
-.src/imageOutput/
+src/imageOutput/
 *.png
 *.gif
 .phpunit.result.cache
-.vendor/
-.coverage-report/
+vendor/
+coverage-report/
 .idea/
