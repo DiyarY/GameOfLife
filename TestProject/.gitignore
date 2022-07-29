@@ -1,4 +1,7 @@
-imageOutput/
+.src/imageOutput/
 *.png
 *.gif
 .idea/
+.phpunit.result.cache
+.vendor/
+.coverage-report/
