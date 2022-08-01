@@ -1,8 +1,8 @@
 <?php
-namespace output;
+namespace GameOfLife\output;
 
-use options\Getopt;
-use cellularAutomat\Board;
+use GameOfLife\options\Getopt;
+use GameOfLife\cellularAutomat\Board;
 
 /**
  * BaseOutput provides functions for pluggable outputs.

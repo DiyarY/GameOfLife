@@ -1,8 +1,8 @@
 <?php
-namespace input;
+namespace GameOfLife\input;
 
-use options\Getopt;
-use cellularAutomat\Board;
+use GameOfLife\options\Getopt;
+use GameOfLife\cellularAutomat\Board;
 
 /**
  * Base class for pluggable inputs.

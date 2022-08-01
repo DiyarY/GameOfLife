@@ -1,10 +1,10 @@
 <?php
-namespace input;
+namespace GameOfLife\input;
 
-use input\Base;
+use GameOfLife\input\Base;
 
-use cellularAutomat\Board;
-use options\Getopt;
+use GameOfLife\cellularAutomat\Board;
+use GameOfLife\options\Getopt;
 
 /**
  * Creates a random board with living/death cells.

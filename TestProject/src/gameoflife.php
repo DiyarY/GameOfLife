@@ -1,27 +1,16 @@
 #!/usr/bin/php
 <?php
 
-use cellularAutomat\Board;
-use options\Getopt;
-use input\Base;
-use output\BaseOutput;
+use GameOfLife\cellularAutomat\Board;
+use GameOfLife\options\Getopt;
+use GameOfLife\input\Base;
+use GameOfLife\output\BaseOutput;
 
-$width = 10;
-$height = 10;
+$width = 5;
+$height = 5;
 $maxSteps = 20;
 
-/**
- * @param $className
- */
-function myAutoload($className) {
-    $classPath = sprintf("%s/%s.php", __DIR__, str_replace("\\", "/", $className));
-    if (is_readable($classPath)) require_once($classPath);
-}
-
-/**
- * Register the autoloader.
- */
-spl_autoload_register("myAutoload");
+require_once "../vendor/autoload.php";
 
 $options = new Getopt(
     [
@@ -50,7 +39,7 @@ foreach ($files as $file)
     //Removes the datatype -> .php from the class file
     $baseClassName = basename($file, ".php");
     //Initializing the input path with their class files but without their respective datatype -> .php
-    $className = "input\\$baseClassName";
+    $className = "GameOfLife\\input\\$baseClassName";
 
     if ($className == Base::class) continue;
 
@@ -79,7 +68,7 @@ foreach ($filesInOutput as $file)
     //Removes the datatype -> .php from the class file
     $baseClassName = basename($file, ".php");
     //Initialize the output path with its class files but without respective data-format -> .php
-    $className = "output\\$baseClassName";
+    $className = "GameOfLife\\output\\$baseClassName";
 
     if ($className == BaseOutput::class) continue;
 
@@ -128,7 +117,7 @@ if ($options->getOption("maxSteps"))
 $board = new Board($width, $height);
 
 $requestedInput = $options->getOption("input") ?? "Random";
-$className="input\\$requestedInput";
+$className="GameOfLife\\input\\$requestedInput";
 
 if (class_exists($className))
 {
@@ -144,7 +133,7 @@ else die ("Could not find input $requestedInput!\n");
 
 //Initialize and return the defined classes inside the output directory
 $requestedOutput = $options->getOption("output") ?? "ConsoleOutput";
-$classNameForOutput = "output\\$requestedOutput";
+$classNameForOutput = "GameOfLife\\output\\$requestedOutput";
 
 if (class_exists($classNameForOutput))
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace output;
+namespace GameOfLife\output;
 
-use options\Getopt;
-use cellularAutomat\Board;
+use GameOfLife\options\Getopt;
+use GameOfLife\cellularAutomat\Board;
 
 /**
  * Shows the output of the current board over the console.
@@ -24,7 +24,7 @@ class ConsoleOutput extends BaseOutput
 
         for ($y = 0; $y < $_board->getHeight(); ++$y) {
             for ($x = 0; $x < $_board->getWidth(); ++$x) {
-                $currentBoard = $board[$x][$y] ? " * " : " - ";
+                $currentBoard = $board[$x][$y] ? "*" : "-";
                 echo $currentBoard;
             }
             echo "\n";

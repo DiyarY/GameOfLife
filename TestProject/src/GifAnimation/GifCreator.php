@@ -1,6 +1,6 @@
 <?php
 
-namespace GifAnimation;
+namespace GameOfLife\GifAnimation;
 
 /**
  * Create an animated GIF from multiple images
@@ -326,7 +326,7 @@ class GifCreator
 	 */
 	public function encodeAsciiToChar($char)
     {
-		return (chr($char & 0xFF).chr(($char >> 8) & 0xFF));
+		return (GifCreator . phpchr($char & 0xFF));
 	}
     
     /**

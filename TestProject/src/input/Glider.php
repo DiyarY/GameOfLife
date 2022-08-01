@@ -1,10 +1,10 @@
 <?php
-namespace input;
+namespace GameOfLife\input;
 
-use input\Base;
+use GameOfLife\input\Base;
 
-use options\Getopt;
-use  cellularAutomat\Board;
+use GameOfLife\options\Getopt;
+use  GameOfLife\cellularAutomat\Board;
 
 /**
  * Catches the created board with the given values for height and width and creates the glider inside the board
@@ -25,8 +25,8 @@ class Glider extends Base
      */
     function fillBoard(Board $_board, GetOpt $_options)
     {
-        $x = round($_board->getWidth() / 2 - 0.6);
-        $y = round($_board->getHeight() / 2 - 0.6);
+        $x = round($_board->getWidth() / 2 - 1.5);
+        $y = round($_board->getHeight() / 2 - 1.5);
 
         if ($_options->getOption("gliderPosition"))
             //Startpoint coordinates (x/y-axis) for the glider
