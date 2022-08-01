@@ -1,8 +1,8 @@
-#Conways Game of Life in PHP 
+# Conways Game of Life in PHP 
 ___
 
 
-#Genral infos about the Game of Life <br><br>
+# Genral infos about the Game of Life <br><br>
 
 If you're unfamiliar with the Conways Game of Life then checkout the Wikipedia Link below <br>
 where you'll find all needed information for it:
@@ -11,7 +11,7 @@ where you'll find all needed information for it:
 > German version: https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens
 ___
 
-##Rules
+## Rules
 
 Conways Game of Life is two-dimensional grid of squares and cells, where each cell <br>
 has two possible states, alive or dead. Each cell interacts with its eight neighbours, <br>
@@ -24,7 +24,7 @@ which are the cells that are horizontally, vertically or diagonally adjacent.
 ___
 
 
-##Output of the grid and generations
+## Output of the grid and generations
 
 ***Living cells are marked with " * " and dead cells with " - "***
 
@@ -92,4 +92,4 @@ ___
 Use following command to create an animated-gif of the board:
 >--output GifOutput
 
-![bg](imageOutput/gif-output.gif)
+![bg](src/imageOutput/gif-output.gif)

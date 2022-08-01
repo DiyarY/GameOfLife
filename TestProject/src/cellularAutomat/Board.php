@@ -1,5 +1,5 @@
 <?php
-namespace cellularAutomat;
+namespace GameOfLife\cellularAutomat;
 
 /**
 * This is a small basic project about conways game of Life

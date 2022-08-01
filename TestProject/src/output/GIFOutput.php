@@ -1,10 +1,10 @@
 <?php
 
-namespace output;
+namespace GameOfLife\output;
 
-use options\Getopt;
-use cellularAutomat\Board;
-use GifAnimation\GifCreator;
+use GameOfLife\options\Getopt;
+use GameOfLife\cellularAutomat\Board;
+use GameOfLife\GifAnimation\GifCreator;
 
 /**
  * An animated gif-file is automatically created by hand of the created images from the board.

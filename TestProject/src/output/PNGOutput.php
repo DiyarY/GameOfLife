@@ -1,9 +1,9 @@
 <?php
 
-namespace output;
+namespace GameOfLife\output;
 
-use options\Getopt;
-use cellularAutomat\Board;
+use GameOfLife\options\Getopt;
+use GameOfLife\cellularAutomat\Board;
 
 /**
  * Creates an image of the current created board in png-format.

@@ -1,10 +1,10 @@
 <?php
 
-namespace input;
+namespace GameOfLife\input;
 
-use input\Base;
-use cellularAutomat\Board;
-use options\Getopt;
+use GameOfLife\input\Base;
+use GameOfLife\cellularAutomat\Board;
+use GameOfLife\options\Getopt;
 
 /**
  * The user is prompted to enter cells that are alive.
