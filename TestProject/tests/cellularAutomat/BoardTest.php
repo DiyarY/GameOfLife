@@ -1,8 +1,8 @@
 <?php
-
 namespace Tests\CellularAutomat;
 
 use GameOfLife\cellularAutomat\Board;
+use GameOfLife\cellularAutomat\Field;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -10,10 +10,12 @@ use PHPUnit\Framework\TestCase;
  */
 class BoardTest extends TestCase
 {
+    /**
+     * @var Board $board Board.
+     * @var int $x Width of the board.
+     * @var int $y Height of the board.
+     */
     protected $board;
-
-    protected $width = 10;
-    protected $height = 10;
     protected $x = 5;
     protected $y = 5;
 
@@ -28,12 +30,12 @@ class BoardTest extends TestCase
     }
 
     /**
-     * Initialize an empty board -> cells are all set on 0.
+     * Checks whether the board - a two-dimensional array - is empty.
      *
-     * @param $_board
-     * @return bool
+     * @param Field[][] $_board
+     * @return bool Is Empty or not.
      */
-    private function emptyBoard($_board)
+    private function checkBoardArrayEmpty(array $_board): bool
     {
         $boardIsEmpty = true;
         foreach ($_board as $row)
@@ -51,9 +53,8 @@ class BoardTest extends TestCase
      * Asserts that width has the same value that was defined inside the constructor.
      *
      * @return void
-     * @test
      */
-    public function checksConstructorWidthIsActuallyWidth()
+    public function testChecksConstructorWidthIsActuallyWidth()
     {
         $this->assertEquals(10, $this->board->getWidth());
     }
@@ -62,73 +63,114 @@ class BoardTest extends TestCase
      * Asserts that height has the same value that was defined inside the constructor.
      *
      * @return void
-     * @test
      */
-    public function checksIfConstructorHeightIsActuallyHeight()
+    public function testChecksIfConstructorHeightIsActuallyHeight()
     {
         $this->assertEquals(10, $this->board->getHeight());
     }
 
     /**
      * Asserts that the created board  is empty.
-     *
-     * @test
      */
-    public function boardIsEmpty()
+    public function testBoardIsEmpty()
     {
-        $board = $this->board->getBoard();
-        $boardIsEmpty = $this->emptyBoard($board);
+        $board = $this->board->getFieldBoard();
+        $boardIsEmpty = $this->checkBoardArrayEmpty($board);
 
         $this->assertTrue($boardIsEmpty);
     }
 
     /**
      * Asserts that the created board is not empty.
-     *
-     * @test
      */
-    public function setCellAssertBoardIsNotEmpty()
+    public function testCreatesNonEmptyBoardBySettingACellOnTrue()
     {
         $this->board->setCell(0,0,1);
-        $board = $this->board->getBoard();
+        $board = $this->board->getFieldBoard();
 
-        $boardIsEmpty = $this->emptyBoard($board);
+        $boardIsEmpty = $this->checkBoardArrayEmpty($board);
 
         $this->assertNotTrue($boardIsEmpty);
     }
 
     /**
-     * Asserts that a cell on the defined coordinate is true -> living cell.
+     * Tests whether the neighbors in the upper left corner are detected or not.
      *
-     * @test
+     * @return void
      */
-    public function livingNeighbors()
+    public function testGetNeighborsUpperLeft()
     {
-        $board = new Board($this->width, $this->height);
+        $expectedNeighborCoordinates=[];
+        $expectedNeighborCoordinates[]= array(0,1);
+        $expectedNeighborCoordinates[]= array(1,1);
+        $expectedNeighborCoordinates[]= array(1,0);
 
-        $this->assertEquals(0, $board->countLivingNeighbors($this->x, $this->y));
-        $board->setCell(1,1,1);
-        $board->setCell(2,1,1);
-        $board->setCell(3,1,1);
-        $this->assertEquals(1, $board->countLivingNeighbors(1,1));
+        $neighbors = $this->board->getNeighborsOfField($this->board->cell(0,0));
+
+        foreach ($expectedNeighborCoordinates as $expectedNeighborCoordinate)
+        {
+            $neighborFound=false;
+            foreach ($neighbors as $neighbor)
+            {
+                if ($neighbor->x()==$expectedNeighborCoordinate[0] && $neighbor->y()==$expectedNeighborCoordinate[1])
+                {
+                    $neighborFound = true;
+                }
+            }
+            $this->assertEquals(true,$neighborFound,"Did not find expected neighbor at $expectedNeighborCoordinate[0],$expectedNeighborCoordinate[1]");
+        }
     }
 
     /**
-     * Asserts that the old generation is equal to the current generation.
+     * Tests whether the coordinates in the bottom right corner are detected or not.
      *
-     * @test
      * @return void
      */
-    public function NextGeneration()
+    public function testGetNeighborsBottomRight()
     {
-        $board = new Board($this->width, $this->height);
-        $board->setCell(1,1,1);
-        $board->setCell(2,1,1);
-        $board->setCell(3,1,1);
-        $oldBoard = $board->getBoard();
-        $board->calculateNextGeneration();
-        $this->assertNotEquals($oldBoard, $board->getBoard());
-        $this->assertEquals($this->width * $this->height, count($board->getBoard(), COUNT_RECURSIVE) - $this->width);
+        $expectedNeighborCoordinates = [];
+        $expectedNeighborCoordinates[] = array(8,9);
+        $expectedNeighborCoordinates[] = array(9,9);
+        $expectedNeighborCoordinates[] = array(9,8);
+
+        $neighborsBottomRight = $this->board->getNeighborsOfField($this->board->cell(8,8));
+
+        foreach ($expectedNeighborCoordinates as $expectedNeighborCoordinate)
+        {
+            $neighborFound=false;
+            foreach ($neighborsBottomRight as $neighborBottomRight)
+            {
+                if ($neighborBottomRight->x()==$expectedNeighborCoordinate[0] && $neighborBottomRight->y()==$expectedNeighborCoordinate[1])
+                {
+                    $neighborFound = true;
+                }
+            }
+            $this->assertEquals(true,$neighborFound,"Did not find expected neighbor at $expectedNeighborCoordinate[0],$expectedNeighborCoordinate[1]");
+        }
     }
 
+    /**
+     * checks whether the coordinate of the filed in the middle of the board is detected or not.
+     *
+     * @return void
+     */
+    public function testGetMiddleFieldOfBoard()
+    {
+        $expectedCoordinate[] = array(4,4);
+
+        $centerFieldOfBoard = $this->board->getNeighborsOfField($this->board->cell(3,3));
+
+        foreach ($expectedCoordinate as $centerCoordinate)
+        {
+            $center = false;
+            foreach ($centerFieldOfBoard as $centerField)
+            {
+                if ($centerField->x() == $centerCoordinate[0] && $centerField->y() == $centerCoordinate[1])
+                {
+                    $center = true;
+                }
+            }
+            $this->assertEquals(true,$center, "Did not find center field $centerCoordinate[0], $centerCoordinate[1]");
+        }
+    }
 }

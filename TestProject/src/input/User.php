@@ -1,8 +1,6 @@
 <?php
-
 namespace GameOfLife\input;
 
-use GameOfLife\input\Base;
 use GameOfLife\cellularAutomat\Board;
 use GameOfLife\options\Getopt;
 

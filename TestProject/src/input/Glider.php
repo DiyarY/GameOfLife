@@ -1,8 +1,6 @@
 <?php
 namespace GameOfLife\input;
 
-use GameOfLife\input\Base;
-
 use GameOfLife\options\Getopt;
 use  GameOfLife\cellularAutomat\Board;
 
@@ -25,8 +23,8 @@ class Glider extends Base
      */
     function fillBoard(Board $_board, GetOpt $_options)
     {
-        $x = round($_board->getWidth() / 2 - 1.5);
-        $y = round($_board->getHeight() / 2 - 1.5);
+        $x = round($_board->getWidth() / 2 - 0.6);
+        $y = round($_board->getHeight() / 2 - 0.6);
 
         if ($_options->getOption("gliderPosition"))
             //Startpoint coordinates (x/y-axis) for the glider
@@ -55,5 +53,4 @@ class Glider extends Base
                 ['g', "gliderPosition", Getopt::REQUIRED_ARGUMENT, " Set the start position of the glider on the coordinates x,y -> CLI-command: \"-g 10,10\" or \"--gliderPosition 10,10\""]
             ]);
     }
-
 }

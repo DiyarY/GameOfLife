@@ -1,5 +1,4 @@
 <?php
-
 namespace GameOfLife\output;
 
 use GameOfLife\options\Getopt;
@@ -13,6 +12,11 @@ use GameOfLife\GifAnimation\GifCreator;
  */
 class GIFOutput extends BaseOutput
 {
+    /**
+     * @var int $imageIndex Index-number of image.
+     * @var int $cellSize Size of the cell.
+     * @var int[] $gifCellColor RGB-color.
+     */
     private $imageIndex = 0;
     private $cellSize = 5;
     private $gifCellColor = [0, 0, 0];
@@ -28,7 +32,7 @@ class GIFOutput extends BaseOutput
     {
         $cellSize = $this->cellSize;
         $gifCellColor = $this->gifCellColor;
-        $board = $_board->getBoard();
+        $board = $_board->getFieldBoard();
 
         $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
         imagecolorallocate($pngImage, 255, 255, 255);

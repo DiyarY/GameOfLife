@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Output;
 
 use GameOfLife\CellularAutomat\Board;

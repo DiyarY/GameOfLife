@@ -1,8 +1,6 @@
 <?php
-
 namespace GameOfLife\output;
 
-use GameOfLife\options\Getopt;
 use GameOfLife\cellularAutomat\Board;
 
 /**
@@ -12,7 +10,6 @@ use GameOfLife\cellularAutomat\Board;
  */
 class ConsoleOutput extends BaseOutput
 {
-
     /**
      * Shows the output of the current board over the console.
      *
@@ -20,12 +17,11 @@ class ConsoleOutput extends BaseOutput
      */
     function outputBoard(Board $_board)
     {
-        $board = $_board->getBoard();
+        $board = $_board->getFieldBoard();
 
         for ($y = 0; $y < $_board->getHeight(); ++$y) {
             for ($x = 0; $x < $_board->getWidth(); ++$x) {
-                $currentBoard = $board[$x][$y] ? "*" : "-";
-                echo $currentBoard;
+                echo $board[$x][$y] ? "*" : "-";
             }
             echo "\n";
         }

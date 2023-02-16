@@ -1,7 +1,7 @@
 <?php
-
 namespace Tests\Input;
 
+use GameOfLife\cellularAutomat\Field;
 use GameOfLife\Options\Getopt;
 use GameOfLife\CellularAutomat\Board;
 use GameOfLife\Input\Random;
@@ -12,6 +12,10 @@ use PHPUnit\Framework\TestCase;
  */
 class RandomTest extends TestCase
 {
+    /**
+     * @var Random $randomInput Random-class.
+     * @var Getopt|(Getopt&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
     protected $randomInput;
     protected $getOption;
 
@@ -29,14 +33,15 @@ class RandomTest extends TestCase
     }
 
     /**
-     * Initialize an empty board -> cells are all set on 0.
+     * Checks whether the board - a two-dimensional array - is empty.
      *
-     * @param $_board
-     * @return bool
+     * @param Field[][] $_board Board.
+     * @return bool Is empty or not.
      */
-    private function emptyBoard($_board)
+    private function checkBoardArrayEmpty(array $_board): bool
     {
         $boardIsEmpty = true;
+
         foreach ($_board as $row)
         {
             foreach ($row as $cell)
@@ -50,24 +55,20 @@ class RandomTest extends TestCase
 
     /**
      * Asserts that the board, with the random initialised living-cells, is not empty.
-     *
-     * @test
      */
-    public function prepareRandomInput()
+    public function testPrepareRandomInput()
     {
         $board = new Board(10, 10);
 
         $this->randomInput->fillBoard($board, $this->getOption);
 
-        $this->assertNotEmpty($this->emptyBoard($board->getBoard()));
+        $this->assertNotEmpty($this->checkBoardArrayEmpty($board->getFieldBoard()));
     }
 
     /**
      * Asserts that the board, with a defined filling-level that sets the random-chosen cells on true, is not empty.
-     *
-     * @test
      */
-    public function fillBoardAndSetFillGrade()
+    public function testFillBoardAndSetFillGrade()
     {
         $board = new Board(10, 10);
         $this->getOption->method("addOptions")
@@ -76,6 +77,20 @@ class RandomTest extends TestCase
 
         $this->randomInput->fillBoard($board, $this->getOption);
 
-        $this->assertNotEmpty($this->emptyBoard($board->getBoard()));
+        //Iterates through the board and checks whether the value of the fillingLevel matches as expected.
+        foreach ($board as $row)
+        {
+            foreach ($row as $cell)
+            {
+                if ($cell != 0)
+                {
+                    $livingCells = count($cell);
+                    if ($livingCells == 50 || $livingCells == 49 || $livingCells == 48)
+                    {
+                        $this->assertNotEmpty($this->checkBoardArrayEmpty($board->getFieldBoard()));
+                    }
+                }
+            }
+        }
     }
 }

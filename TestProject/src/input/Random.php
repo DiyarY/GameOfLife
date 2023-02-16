@@ -1,8 +1,6 @@
 <?php
 namespace GameOfLife\input;
 
-use GameOfLife\input\Base;
-
 use GameOfLife\cellularAutomat\Board;
 use GameOfLife\options\Getopt;
 
@@ -31,11 +29,7 @@ class Random extends Base
         {
             for ($x = 0; $x < $_board->getWidth(); ++$x)
             {
-                if ($_options->getOption("fillingLevel"))
-                    $_board->setCell($x, $y, rand(0, 99) < $fillingRange);
-
-                else if ($_options->getOption("input"))
-                    $_board->setCell($x, $y, rand(0, 1));
+                $_board->setCell($x, $y, (rand(0,99) < $fillingRange ? 1 : 0));
             }
         }
     }
