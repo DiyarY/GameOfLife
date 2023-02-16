@@ -200,5 +200,4 @@ for ($i = 0; $i < $maxSteps; $i++)
         break;
     }
 }
-
 $output->finishOutput();
