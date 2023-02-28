@@ -36,8 +36,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(2,4));
         $this->assertFalse($newFieldValue);
@@ -63,8 +65,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(1,2));
         $this->assertFalse($newFieldValue);
@@ -90,8 +94,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(1,1));
         $this->assertTrue($newFieldValue);
@@ -117,8 +123,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(1,2));
         $this->assertTrue($newFieldValue);

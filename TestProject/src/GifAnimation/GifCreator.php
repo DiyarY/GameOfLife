@@ -326,7 +326,8 @@ class GifCreator
 	 */
 	public function encodeAsciiToChar($char)
     {
-		return (GifCreator . phpchr($char & 0xFF));
+		//return (GifCreator . phpchr($char & 0xFF));
+        return (chr($char & 0xFF).chr(($char >> 8) & 0xFF));
 	}
     
     /**

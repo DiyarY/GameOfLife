@@ -11,12 +11,16 @@ use PHPUnit\Framework\TestCase;
 class BoardTest extends TestCase
 {
     /**
-     * @var Board $board Board.
-     * @var int $x Width of the board.
-     * @var int $y Height of the board.
+     * @var Board $board Defines the current board.
      */
     protected $board;
+    /**
+     * @var int $x Defines the width of the board.
+     */
     protected $x = 5;
+    /**
+     * @var int $y Defines the height of the board.
+     */
     protected $y = 5;
 
     /**
@@ -56,7 +60,7 @@ class BoardTest extends TestCase
      */
     public function testChecksConstructorWidthIsActuallyWidth()
     {
-        $this->assertEquals(10, $this->board->getWidth());
+        $this->assertEquals(10, $this->board->width());
     }
 
     /**
@@ -66,7 +70,7 @@ class BoardTest extends TestCase
      */
     public function testChecksIfConstructorHeightIsActuallyHeight()
     {
-        $this->assertEquals(10, $this->board->getHeight());
+        $this->assertEquals(10, $this->board->height());
     }
 
     /**
@@ -75,9 +79,8 @@ class BoardTest extends TestCase
     public function testBoardIsEmpty()
     {
         $board = $this->board->getFieldBoard();
-        $boardIsEmpty = $this->checkBoardArrayEmpty($board);
 
-        $this->assertTrue($boardIsEmpty);
+        $this->assertTrue($this->checkBoardArrayEmpty($board));
     }
 
     /**
@@ -88,9 +91,7 @@ class BoardTest extends TestCase
         $this->board->setCell(0,0,1);
         $board = $this->board->getFieldBoard();
 
-        $boardIsEmpty = $this->checkBoardArrayEmpty($board);
-
-        $this->assertNotTrue($boardIsEmpty);
+        $this->assertNotTrue($this->checkBoardArrayEmpty($board));
     }
 
     /**
@@ -105,7 +106,7 @@ class BoardTest extends TestCase
         $expectedNeighborCoordinates[]= array(1,1);
         $expectedNeighborCoordinates[]= array(1,0);
 
-        $neighbors = $this->board->getNeighborsOfField($this->board->cell(0,0));
+        $neighbors = $this->board->getNeighboursOfField($this->board->cell(0,0));
 
         foreach ($expectedNeighborCoordinates as $expectedNeighborCoordinate)
         {
@@ -133,7 +134,7 @@ class BoardTest extends TestCase
         $expectedNeighborCoordinates[] = array(9,9);
         $expectedNeighborCoordinates[] = array(9,8);
 
-        $neighborsBottomRight = $this->board->getNeighborsOfField($this->board->cell(8,8));
+        $neighborsBottomRight = $this->board->getNeighboursOfField($this->board->cell(8,8));
 
         foreach ($expectedNeighborCoordinates as $expectedNeighborCoordinate)
         {
@@ -158,7 +159,7 @@ class BoardTest extends TestCase
     {
         $expectedCoordinate[] = array(4,4);
 
-        $centerFieldOfBoard = $this->board->getNeighborsOfField($this->board->cell(3,3));
+        $centerFieldOfBoard = $this->board->getNeighboursOfField($this->board->cell(3,3));
 
         foreach ($expectedCoordinate as $centerCoordinate)
         {

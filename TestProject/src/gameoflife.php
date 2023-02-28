@@ -171,7 +171,7 @@ else die ("Could not find output $requestedOutput!\n");
 
 
 //Initialize and returns the defined rule-class inside the rule-directory.
-$requestedRule = $options->getOption("StandardRule") ?? "CopyRule";
+$requestedRule = $options->getOption("rule") ?? "StandardRule";
 $classNameRule = "GameOfLife\\rules\\$requestedRule";
 
 if (class_exists($classNameRule))
@@ -185,7 +185,6 @@ if (class_exists($classNameRule))
     else die ("Requested rule $requestedRule doesn't inherit from rule\\BaseRule!\n");
 }
 else die ("Could not find rule $requestedRule!\n");
-
 
 $gameLogic = new GameLogic($rule);
 

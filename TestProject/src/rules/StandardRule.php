@@ -15,6 +15,7 @@ class StandardRule extends BaseRule
     public function calculateNewState(Field $_field): bool
     {
         $numberOfLivingNeighbours = $_field->numberOfLivingNeighbors();
+        /*
         if ($_field->isDead())
         { //cell is dead
             if ($numberOfLivingNeighbours==3) return true;
@@ -25,6 +26,34 @@ class StandardRule extends BaseRule
             if ($numberOfLivingNeighbours == 2 || $numberOfLivingNeighbours == 3) return true;
             if ($numberOfLivingNeighbours > 3) return false;
         }
-        return false;
+        */
+        //return false;
+
+        /*
+        if ($_field->isAlive())
+        {
+            if ($numberOfLivingNeighbours < 2 || $numberOfLivingNeighbours > 3) return false;
+            elseif ($numberOfLivingNeighbours == 2 || $numberOfLivingNeighbours == 3) return true;
+        }
+        else
+        {
+            if ($numberOfLivingNeighbours == 3) return true;
+        }
+        return true;
+        */
+
+        /*
+        $state = 0;
+
+        if ($numberOfLivingNeighbours == 3 || $numberOfLivingNeighbours == 2 && $_field->isAlive()) $state = 1;
+
+        return $state;
+        */
+
+        $currentGeneration = [0, 0, 1, 1, 0, 0, 0, 0, 0];
+        $newGeneration = [0, 0, 0, 1, 0, 0, 0, 0, 0];
+
+        if ($_field->value()) return $currentGeneration[$numberOfLivingNeighbours];
+        else return $newGeneration[$numberOfLivingNeighbours];
     }
 }

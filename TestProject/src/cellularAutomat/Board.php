@@ -16,13 +16,16 @@ namespace GameOfLife\cellularAutomat;
 class Board
 {
     /**
-     * @var $height
-     * @var $width
-     * @var $board = [[]]
-     * @var array[]|Field[][]
+     * @var int $height Defines the height of the board.
      */
     private $height;
+    /**
+     * @var int $width Defines the width of the board.
+     */
     private $width;
+    /**
+     * @var array[]|Field[][] Stores the fields/cells of the board.
+     */
     public $board = [[]];
 
     /**
@@ -39,11 +42,11 @@ class Board
     }
 
     /**
-     * Returns an empty Board.
+     * Returns an array with Field-objects.
      *
-     * @return Field[][] Represents a field.
+     * @return Field[][] Defines a field.
      */
-    public function emptyField(): array
+    private function emptyField(): array
     {
         $newBoard = [[]];
         for ($y = 0; $y < $this->height; $y++)
@@ -61,7 +64,7 @@ class Board
      *
      * @return array[]|Field[][]|int
      */
-    function getHeight()
+    function height()
     {
         return $this->height;
     }
@@ -71,7 +74,7 @@ class Board
      *
      * @return int
      */
-    function getWidth(): int
+    function width(): int
     {
         return $this->width;
     }
@@ -84,9 +87,9 @@ class Board
      * @param bool $_value State of the cell.
      * @return mixed
      */
-    function setCell($_x, $_y, bool $_value)
+    public function setCell($_x, $_y, bool $_value)
     {
-        if ($_x < 0 || $_y < 0 || $_x >= $this->getWidth() || $_y >= $this->getHeight())
+        if ($_x < 0 || $_y < 0 || $_x >= $this->width() || $_y >= $this->height())
             return null;
 
         $this->board[$_x][$_y]->setValue($_value);
@@ -100,7 +103,7 @@ class Board
      * @param Field $_field The field to get the neighbors from
      * @return Field[] All the neighbors of the given \c $_field
      */
-    function getNeighborsOfField(Field $_field)
+    public function getNeighboursOfField(Field $_field)
     {
         $neighborFields = [];
         $x = $_field->x();
@@ -130,7 +133,7 @@ class Board
     function cell(int $_x, int $_y): ?Field
     {
         //Checks whether coordinate is out of border
-        if ($_x < 0 || $_y < 0 || $_x >= $this->getWidth() || $_y >= $this->getHeight())
+        if ($_x < 0 || $_y < 0 || $_x >= $this->width() || $_y >= $this->height())
             return null;
 
         return $this->board[$_x][$_y];
@@ -149,7 +152,7 @@ class Board
         {
             for ($x = 0; $x < $this->width; $x++)
             {
-                $newBoard[$x][$y] = $this->board[$x][$y]->getValue();
+                $newBoard[$x][$y] = $this->board[$x][$y]->value();
             }
         }
         return $newBoard;

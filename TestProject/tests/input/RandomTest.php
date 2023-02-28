@@ -12,10 +12,6 @@ use PHPUnit\Framework\TestCase;
  */
 class RandomTest extends TestCase
 {
-    /**
-     * @var Random $randomInput Random-class.
-     * @var Getopt|(Getopt&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
-     */
     protected $randomInput;
     protected $getOption;
 
@@ -71,9 +67,9 @@ class RandomTest extends TestCase
     public function testFillBoardAndSetFillGrade()
     {
         $board = new Board(10, 10);
-        $this->getOption->method("addOptions")
+        $this->getOption->method("getOption")
             ->with("fillingLevel")
-            ->willReturn("50");
+            ->willReturn("10");
 
         $this->randomInput->fillBoard($board, $this->getOption);
 
@@ -92,5 +88,16 @@ class RandomTest extends TestCase
                 }
             }
         }
+    }
+
+    /**
+     * Tests whether the
+     *
+     * @return void
+     */
+    public function testAddOptionTakesAnOption()
+    {
+        $this->randomInput->addOptions($this->getOption);
+        $this->assertNotEmpty($this->randomInput);
     }
 }

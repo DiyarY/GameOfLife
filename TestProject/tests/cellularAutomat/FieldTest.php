@@ -29,7 +29,7 @@ class FieldTest extends TestCase
         $cell = new Field($board, 0,0);
 
         $cell->setValue(50);
-        $this->assertEquals(50, $cell->getValue());
+        $this->assertEquals(50, $cell->value());
     }
 
     /**

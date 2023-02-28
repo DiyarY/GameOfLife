@@ -57,8 +57,29 @@ class PNGOutputTest extends TestCase
         imagecolorallocate($pngImage, 255, 255, 255);
         imagepng($pngImage, "imageOutput/referenceImage.png");
 
-        $currentPngImage = file_get_contents("imageOutput/pngImage-000.png");
+        $referenceImage = file_get_contents("imageOutput/referenceImage.png");
 
-        $this->assertEquals($currentPngImage, file_get_contents("imageOutput/pngImage-000.png"));
+        $this->assertEquals($referenceImage, file_get_contents("imageOutput/pngImage-000.png"));
+    }
+
+    /**
+     * Tests whether the board is not empty.
+     *
+     * @return void
+     */
+    public function testNonEmptyBoard()
+    {
+        $this->pngOutput->startOutput($this->getOpt);
+        $this->board->setCell(0,0,1);
+        $this->pngOutput->outputBoard($this->board);
+        $this->pngOutput->finishOutput();
+
+        $pngImage = imagecreate(5,5);
+        imagecolorallocate($pngImage, 0,0,0);
+        $template = imagecolorallocate($pngImage, 255,255,255);
+        imagesetpixel($pngImage,0,0,$template);
+        imagepng($pngImage, "imageOutput/referenceImage.png");
+
+        $this->assertNotEmpty(file_get_contents("imageOutput/pngImage-000.png"), file_get_contents("imageOutput/referenceImage.png"));
     }
 }

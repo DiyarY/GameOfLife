@@ -25,9 +25,9 @@ class Random extends Base
         if ($_options->getOption("fillingLevel"))
             $fillingRange = intval($_options->getOption("fillingLevel"));
 
-        for ($y = 0; $y < $_board->getHeight(); ++$y)
+        for ($y = 0; $y < $_board->height(); ++$y)
         {
-            for ($x = 0; $x < $_board->getWidth(); ++$x)
+            for ($x = 0; $x < $_board->width(); ++$x)
             {
                 $_board->setCell($x, $y, (rand(0,99) < $fillingRange ? 1 : 0));
             }

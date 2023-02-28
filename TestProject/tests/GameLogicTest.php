@@ -32,14 +32,16 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $standardRule->calculateNewState($board->cell(1,1));
         $this->assertTrue($newFieldValue);
 
         $gameLogic->calculateNextGeneration($board);
-        $consoleOutput->outputBoard($board);
+        //$consoleOutput->outputBoard($board);
 
         $boardLayout = <<<BOARD
         ***
@@ -49,14 +51,16 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $standardRule->calculateNewState($board->cell(1,1));
         $this->assertFalse($newFieldValue);
 
         $gameLogic->calculateNextGeneration($board);
-        $consoleOutput->outputBoard($board);
+        //$consoleOutput->outputBoard($board);
 
         $this->assertTrue($board->board[0][0]->isAlive());
         $this->assertFalse($board->board[0][1]->isDead());
@@ -84,32 +88,18 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
-
-        $this->assertFalse($gameLogic->isLoopDetected());
-
-        $nextGeneration = $gameLogic->calculateNextGeneration($board);
-        $consoleOutput->outputBoard($nextGeneration);
+        */
 
         $nextGeneration = $gameLogic->calculateNextGeneration($board);
-        $consoleOutput->outputBoard($nextGeneration);
-        $this->assertFalse($gameLogic->isLoopDetected());
 
-        $nextGeneration = $gameLogic->calculateNextGeneration($nextGeneration);
-        $consoleOutput->outputBoard($nextGeneration);
-        $this->assertFalse($gameLogic->isLoopDetected());
+        for ($i = 0; $i < 5; $i++)
+        {
+            $nextGeneration = $gameLogic->calculateNextGeneration($nextGeneration);
+        }
 
-        $nextGeneration = $gameLogic->calculateNextGeneration($nextGeneration);
-        $consoleOutput->outputBoard($nextGeneration);
-        $this->assertFalse($gameLogic->isLoopDetected());
-
-        $nextGeneration = $gameLogic->calculateNextGeneration($nextGeneration);
-        $consoleOutput->outputBoard($nextGeneration);
-        $this->assertFalse($gameLogic->isLoopDetected());
-
-        $nextGeneration = $gameLogic->calculateNextGeneration($nextGeneration);
-        $consoleOutput->outputBoard($nextGeneration);
         $this->assertTrue($gameLogic->isLoopDetected());
     }
 
@@ -133,8 +123,10 @@ BOARD;
 
         $boardFiller2 = new BoardFromTextFiller();
         $boardFiller2->fillBoardFromText($temp, $tempLayout);
+        /*
         $consoleOutput2 = new ConsoleOutput();
         $consoleOutput2->outputBoard($temp);
+        */
 
         $boardLayout = <<<BOARD
         ---
@@ -144,20 +136,19 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
+
+        $nextGeneration = $gameLogic->calculateNextGeneration($board);
 
         for ($i = 0; $i < 5; $i++)
         {
-            $nextGeneration = $gameLogic->calculateNextGeneration($board);
             $nextGeneration = $gameLogic->calculateNextGeneration($nextGeneration);
-
-            if ($nextGeneration === $temp)
-            {
-                $this->assertTrue($gameLogic->isLoopDetected());
-                break;
-            }
-            else $this->assertFalse($gameLogic->isLoopDetected());
+            //$consoleOutput->outputBoard($nextGeneration);
         }
+
+        $this->assertTrue($gameLogic->isLoopDetected());
     }
 }

@@ -7,14 +7,20 @@ namespace GameOfLife\cellularAutomat;
 class Field
 {
     /**
-     * @var bool $isAlive true.
-     * @var array $board Board.
-     * @val int $x X-coordinate.
-     * @val int $y Y-coordinate.
+     * @var bool $isAlive Defines whether the field/cell is false/true.
      */
     private $isAlive;
+    /**
+     * @var Board $board Defines the current board.
+     */
     private $board;
+    /**
+     * @var int $x Defines the x-coordinate of the board.
+     */
     private $x;
+    /**
+     * @var int $y Defines the y-coordinate of the board.
+     */
     private $y;
 
     /**
@@ -26,8 +32,8 @@ class Field
     {
         if ($_x < 0) throw new \RuntimeException("X value '$_x' is smaller than the allowed 0");
         if ($_y < 0) throw new \RuntimeException("Y value '$_y' is smaller than the allowed 0");
-        if ($_x > $_board->getWidth()) throw new \RuntimeException("X value '$_x' is bigger than the allowed board with of " . $_board->getWidth());
-        if ($_y > $_board->getHeight()) throw new \RuntimeException("Y value '$_y' is bigger than the allowed border height of " . $_board->getHeight());
+        if ($_x > $_board->width()) throw new \RuntimeException("X value '$_x' is bigger than the allowed board with of " . $_board->width());
+        if ($_y > $_board->height()) throw new \RuntimeException("Y value '$_y' is bigger than the allowed border height of " . $_board->height());
 
         $this->x = $_x;
         $this->y = $_y;
@@ -51,7 +57,7 @@ class Field
      *
      * @return bool new value of the cell.
      */
-    public function getValue()
+    public function value()
     {
         return $this->isAlive;
     }
@@ -103,10 +109,10 @@ class Field
      */
     public function numberOfLivingNeighbors(): int
     {
-        $neighbors = $this->board->getNeighborsOfField($this);
+        $neighbors = $this->board->getNeighboursOfField($this);
         $numberOfLivingNeighbors = 0;
         foreach ($neighbors as $neighborField) {
-            if ($neighborField->getvalue() == 1) $numberOfLivingNeighbors++;
+            if ($neighborField->value() == 1) $numberOfLivingNeighbors++;
         }
         return $numberOfLivingNeighbors;
     }
@@ -118,10 +124,10 @@ class Field
      */
     public function numberOfDeadNeighbors(): int
     {
-        $neighbors = $this->board->getNeighborsOfField($this);
+        $neighbors = $this->board->getNeighboursOfField($this);
         $numberOfDeadNeighbors = 0;
         foreach ($neighbors as $neighborField) {
-            if ($neighborField->getvalue() == 0) $numberOfDeadNeighbors++;
+            if ($neighborField->value() == 0) $numberOfDeadNeighbors++;
         }
         return $numberOfDeadNeighbors;
     }

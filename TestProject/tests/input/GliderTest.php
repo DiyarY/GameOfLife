@@ -78,7 +78,7 @@ class GliderTest extends TestCase
      */
     public function testGliderFillWithPosition()
     {
-        $this->getOption->method("addOptions")
+        $this->getOption->method("getOption")
             ->with("gliderPosition")
             ->willReturn("1,1");
 
@@ -86,14 +86,25 @@ class GliderTest extends TestCase
 
         $gliderArray = [
             [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1],
-            [0, 0, 1, 0, 1],
-            [0, 0, 0, 1, 1]
+            [0, 0, 0, 1, 0],
+            [0, 1, 0, 1, 0],
+            [0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 0]
         ];
 
         $this->glider->fillBoard($board, $this->getOption);
 
         $this->assertEquals($gliderArray, $board->getFieldBoard());
+    }
+
+    /**
+     * Tests whether the extended-option is being called.
+     *
+     * @return void
+     */
+    public function testIfAddOptionTakesAnOption()
+    {
+        $this->glider->addOptions($this->getOption);
+        $this->assertNotEmpty($this->glider);
     }
 }

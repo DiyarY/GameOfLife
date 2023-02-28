@@ -23,8 +23,8 @@ class Glider extends Base
      */
     function fillBoard(Board $_board, GetOpt $_options)
     {
-        $x = round($_board->getWidth() / 2 - 0.6);
-        $y = round($_board->getHeight() / 2 - 0.6);
+        $x = round($_board->width() / 2 - 0.6);
+        $y = round($_board->height() / 2 - 0.6);
 
         if ($_options->getOption("gliderPosition"))
             //Startpoint coordinates (x/y-axis) for the glider

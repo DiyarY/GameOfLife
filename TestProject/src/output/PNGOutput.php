@@ -12,6 +12,9 @@ use GameOfLife\cellularAutomat\Board;
  */
 class PNGOutput extends BaseOutput
 {
+    /**
+     * @var int $imageIndex Defines the index-number of the currend image.
+     */
     private $imageIndex = 0;
 
     /**
@@ -23,14 +26,14 @@ class PNGOutput extends BaseOutput
      */
       function outputBoard(Board $_board)
       {
-          $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
+          $pngImage = imagecreate($_board->height() * 5, $_board->width() * 5);
           imagecolorallocate($pngImage, 100, 100, 10);
           $cellColor = imagecolorallocate($pngImage, 10, 10, 10);
 
           //Creates the living cells
-          for ($y = 0; $y < $_board->getHeight(); ++$y)
+          for ($y = 0; $y < $_board->height(); ++$y)
           {
-              for ($x = 0; $x < $_board->getWidth(); ++$x)
+              for ($x = 0; $x < $_board->width(); ++$x)
               {
                   //Set color for the living cells
                   if ($_board->setCell($x, $y, rand(0, 1)))

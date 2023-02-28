@@ -13,12 +13,16 @@ use GameOfLife\GifAnimation\GifCreator;
 class GIFOutput extends BaseOutput
 {
     /**
-     * @var int $imageIndex Index-number of image.
-     * @var int $cellSize Size of the cell.
-     * @var int[] $gifCellColor RGB-color.
+     * @var int $imageIndex Defines the index-number of the current image.
      */
     private $imageIndex = 0;
+    /**
+     * @var int $cellSize Defines the size of the cell.
+     */
     private $cellSize = 5;
+    /**
+     * @var int[] $gifCellColor Defines the color of the cell.
+     */
     private $gifCellColor = [0, 0, 0];
 
     /**
@@ -34,14 +38,14 @@ class GIFOutput extends BaseOutput
         $gifCellColor = $this->gifCellColor;
         $board = $_board->getFieldBoard();
 
-        $pngImage = imagecreate($_board->getHeight() * 5, $_board->getWidth() * 5);
+        $pngImage = imagecreate($_board->height() * 5, $_board->width() * 5);
         imagecolorallocate($pngImage, 255, 255, 255);
         $cellColor = imagecolorallocate($pngImage, intval($gifCellColor[0]), intval($gifCellColor[1]), intval($gifCellColor[2]));
 
         //Creates the living cells
-        for ($y = 0; $y < $_board->getHeight(); ++$y)
+        for ($y = 0; $y < $_board->height(); ++$y)
         {
-            for ($x = 0; $x < $_board->getWidth(); ++$x)
+            for ($x = 0; $x < $_board->width(); ++$x)
             {
                 //Set color for the living cells
                 if($board[$x][$y] == 1)

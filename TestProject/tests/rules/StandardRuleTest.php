@@ -2,6 +2,7 @@
 namespace Tests\Rules;
 
 use GameOfLife\cellularAutomat\Board;
+use GameOfLife\GameLogic;
 use GameOfLife\output\ConsoleOutput;
 use GameOfLife\Rules\StandardRule;
 use PHPUnit\Framework\TestCase;
@@ -48,8 +49,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board,$boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(1,1));
         $this->assertTrue($newFieldValue);
@@ -74,8 +77,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(0,1));
         $this->assertTrue($newFieldValue);
@@ -100,8 +105,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(1,1));
         $this->assertTrue($newFieldValue);
@@ -126,8 +133,10 @@ BOARD;
 
         $boardFiller = new BoardFromTextFiller();
         $boardFiller->fillBoardFromText($board, $boardLayout);
+        /*
         $consoleOutput = new ConsoleOutput();
         $consoleOutput->outputBoard($board);
+        */
 
         $newFieldValue = $rule->calculateNewState($board->cell(1,1));
         $this->assertFalse($newFieldValue);

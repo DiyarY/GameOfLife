@@ -19,8 +19,8 @@ class ConsoleOutput extends BaseOutput
     {
         $board = $_board->getFieldBoard();
 
-        for ($y = 0; $y < $_board->getHeight(); ++$y) {
-            for ($x = 0; $x < $_board->getWidth(); ++$x) {
+        for ($y = 0; $y < $_board->height(); ++$y) {
+            for ($x = 0; $x < $_board->width(); ++$x) {
                 echo $board[$x][$y] ? "*" : "-";
             }
             echo "\n";
